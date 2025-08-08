@@ -3,237 +3,220 @@
 <head>
 <meta charset="UTF-8">
 <title>Acompanhamento Pedagógico</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #f5f5f5;
-  }
-  h1 {
-    background: #4CAF50;
-    color: white;
-    margin: 0;
-    padding: 15px;
-    text-align: center;
-  }
-  .accordion {
-    background-color: white;
-    border-bottom: 1px solid #ccc;
-  }
-  .accordion button {
-    width: 100%;
-    text-align: left;
-    padding: 15px;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background: #e0e0e0;
-  }
-  .accordion button.active {
-    background: #ccc;
-  }
-  .panel {
-    display: none;
-    background-color: white;
-    padding: 15px;
-  }
-  label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  input, select, textarea {
-    width: 100%;
-    padding: 8px;
-    margin-top: 4px;
-    box-sizing: border-box;
-  }
-  .checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .checkbox-group label {
-    font-weight: normal;
-  }
-  button.submit-btn, button.reset-btn {
-    padding: 12px;
-    margin-top: 15px;
-    width: 100%;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-  }
-  button.submit-btn {
-    background: #4CAF50;
-    color: white;
-  }
-  button.reset-btn {
-    background: #f44336;
-    color: white;
-  }
-  a.whatsapp-btn {
-    display: block;
-    background: #25d366;
-    color: white;
-    padding: 12px;
-    text-align: center;
-    text-decoration: none;
-    margin-top: 10px;
-    font-size: 16px;
-  }
+body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
+.container { max-width: 900px; margin: auto; padding: 10px; }
+h1 { text-align: center; }
+.accordion { background-color: #007bff; color: white; cursor: pointer; padding: 12px; width: 100%; border: none; text-align: left; font-size: 16px; transition: 0.4s; }
+.active, .accordion:hover { background-color: #0056b3; }
+.panel { padding: 10px; display: none; background-color: white; }
+input, select, textarea { width: 100%; padding: 6px; margin: 6px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 5px; }
+button, a.btn { background-color: #28a745; color: white; padding: 12px; margin: 10px 5px 0 0; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; display: inline-block; text-align: center; }
+a.btn { text-decoration: none; }
+button:hover, a.btn:hover { background-color: #218838; }
 </style>
 </head>
 <body>
-
+<div class="container">
 <h1>Acompanhamento Pedagógico</h1>
-
 <form id="formulario">
+<button type="button" class="accordion">Seção I</button>
+<div class="panel">
+<label>Data da observação:<textarea name="Data da observação"></textarea></label>
+<label>SEC I 1:<select name="SEC_I_1"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+<label>SEC I 2:<select name="SEC_I_2"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+<label>SEC I 3:<select name="SEC_I_3"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+<label>SEC I 4:<select name="SEC_I_4"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+<label>SEC I 5:<select name="SEC_I_5"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+</div>
+<button type="button" class="accordion">Seção II</button>
+<div class="panel">
+<label>SEC II 1:<input type="text" name="SEC_II_1"></label>
+<label>SEC II 2:<input type="text" name="SEC_II_2"></label>
+<label>SEC II 3:<input type="text" name="SEC_II_3"></label>
+<label>SEC II 4:<input type="text" name="SEC_II_4"></label>
+<label>SEC II 7:<input type="text" name="SEC_II_7"></label>
+<label>SEC II 5:<input type="text" name="SEC_II_5"></label>
+<label>SEC II 6:<input type="text" name="SEC_II_6"></label>
+<label>SEC II 8:<input type="text" name="SEC_II_8"></label>
+<label>SEC II 9:<input type="text" name="SEC_II_9"></label>
+<label>SEC II 10:<input type="text" name="SEC_II_10"></label>
+<label>SEC II 11:<input type="text" name="SEC_II_11"></label>
+<label>SEC II 12:<input type="text" name="SEC_II_12"></label>
+<label>SEC II 13 1:<input type="text" name="SEC_II_13_1"></label>
+<label>SEC II 13 2:<input type="text" name="SEC_II_13_2"></label>
+<label>SEC II 14 1:<input type="text" name="SEC_II_14_1"></label>
+<label>SEC II 14 2:<input type="text" name="SEC_II_14_2"></label>
+<label>SEC II 14 3:<input type="text" name="SEC_II_14_3"></label>
+<label>SEC II 14 4:<input type="text" name="SEC_II_14_4"></label>
+<label>SEC II 15 1:<input type="text" name="SEC_II_15_1"></label>
+<label>SEC II 15 2:<input type="text" name="SEC_II_15_2"></label>
+</div>
+<button type="button" class="accordion">Seção III</button>
+<div class="panel">
+<label>SEC III MES:<input type="text" name="SEC_III_MES"></label>
+<label>SEC III ANO:<input type="text" name="SEC_III_ANO"></label>
+<label>SEC III PROFESSORA:<input type="text" name="SEC_III_PROFESSORA"></label>
+<label>SEC III TURMA:<input type="text" name="SEC_III_TURMA"></label>
+<label>SEC III OBSERVADOR:<textarea name="SEC_III_OBSERVADOR"></textarea></label>
+<label>SEC III OBS COORDENADORA:<textarea name="SEC_III_OBS_COORDENADORA"></textarea></label>
+<label>SEC III COMENTARIO:<input type="text" name="SEC_III_COMENTARIO"></label>
+<label>SEC III 4.3 1:<input type="text" name="SEC_III_4.3_1"></label>
+<label>SEC III 4.3 2:<input type="text" name="SEC_III_4.3_2"></label>
+<label>SEC III 4.3 3:<input type="text" name="SEC_III_4.3_3"></label>
+<label>SEC III 4.4 1:<input type="text" name="SEC_III_4.4_1"></label>
+<label>SEC III 4.4 2:<input type="text" name="SEC_III_4.4_2"></label>
+<label>SEC III 4.4 3:<input type="text" name="SEC_III_4.4_3"></label>
+<label>SEC III 4.4 4:<input type="text" name="SEC_III_4.4_4"></label>
+<label>SEC III 4.4 5:<input type="text" name="SEC_III_4.4_5"></label>
+<label>SEC III 4.4 6:<input type="text" name="SEC_III_4.4_6"></label>
+<label>SEC III 4.4 7:<input type="text" name="SEC_III_4.4_7"></label>
+<label>SEC III 4.2 1 OBS:<textarea name="SEC_III_4.2_1_OBS"></textarea></label>
+<label>SEC III 4.1 2 OBS:<textarea name="SEC_III_4.1_2_OBS"></textarea></label>
+<label>SEC III 4.2 3 OBS:<textarea name="SEC_III_4.2_3_OBS"></textarea></label>
+<label>SEC III 4.2 4 OBS:<textarea name="SEC_III_4.2_4_OBS"></textarea></label>
+<label>SEC III 4.2 5 OBS:<textarea name="SEC_III_4.2_5_OBS"></textarea></label>
+<label>SEC III 4.2 2 OBS:<textarea name="SEC_III_4.2_2_OBS"></textarea></label>
+<label>SEC III 5 1:<input type="text" name="SEC_III_5_1"></label>
+<label>SEC III 5 2:<input type="text" name="SEC_III_5_2"></label>
+<label>SEC III 5 3:<input type="text" name="SEC_III_5_3"></label>
+<label>SEC III 6 1 OBS:<textarea name="SEC_III_6_1_OBS"></textarea></label>
+<label><input type="checkbox" name="SEC_III_6_2_CHECKBOX"> SEC III 6 2 CHECKBOX</label>
+<label>SEC III 6 2 OBS:<textarea name="SEC_III_6_2_OBS"></textarea></label>
+<label><input type="checkbox" name="SEC_III_6_3_CHECKBOX"> SEC III 6 3 CHECKBOX</label>
+<label>SEC III 6 3 OBS:<textarea name="SEC_III_6_3_OBS"></textarea></label>
+<label><input type="checkbox" name="SEC_III_6_4_CHECKBOX"> SEC III 6 4 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_III_6_5_CHECKBOX"> SEC III 6 5 CHECKBOX</label>
+<label>SEC III 6 5 OBS:<textarea name="SEC_III_6_5_OBS"></textarea></label>
+<label><input type="checkbox" name="SEC_III_4_1_1_CHECKBOX"> SEC III 4 1 1 CHECKBOX</label>
+<label>SEC III 3 1:<input type="text" name="SEC_III_3_1"></label>
+<label>SEC III 3 2:<input type="text" name="SEC_III_3_2"></label>
+<label>SEC III 3 3:<input type="text" name="SEC_III_3_3"></label>
+<label>SEC III 3 4:<input type="text" name="SEC_III_3_4"></label>
+<label>SEC III 3 5:<input type="text" name="SEC_III_3_5"></label>
+<label>SEC III 3 6:<input type="text" name="SEC_III_3_6"></label>
+<label>SEC III 3 7:<input type="text" name="SEC_III_3_7"></label>
+<label><input type="checkbox" name="SEC_III_4_1_2_CHECKBOX"> SEC III 4 1 2 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_III_4_2_1_CHECKBOX"> SEC III 4 2 1 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_III_4_2_2_CHECKBOX"> SEC III 4 2 2 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_III_4_2_3_CHECKBOX"> SEC III 4 2 3 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_III_4_2_4_CHECKBOX"> SEC III 4 2 4 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_III_4_2_5_CHECKBOX"> SEC III 4 2 5 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_III_CHECKBOX_1"> SEC III CHECKBOX 1</label>
+<label><input type="checkbox" name="SEC_III_CHECKBOX_2"> SEC III CHECKBOX 2</label>
+<label><input type="checkbox" name="SEC_III_CHECKBOX_3"> SEC III CHECKBOX 3</label>
+<label><input type="checkbox" name="SEC_III_CHECKBOX_4"> SEC III CHECKBOX 4</label>
+<label><input type="checkbox" name="SEC_III_CHECKBOX_5"> SEC III CHECKBOX 5</label>
+<label><input type="checkbox" name="SEC_III_CHECKBOX_6"> SEC III CHECKBOX 6</label>
+<label><input type="checkbox" name="SEC_III_CHECKBOX_7"> SEC III CHECKBOX 7</label>
+<label><input type="checkbox" name="SEC_III_CHECKBOX_8"> SEC III CHECKBOX 8</label>
+<label><input type="checkbox" name="SEC_III_6_1_CHECKBOX"> SEC III 6 1 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_III_2.3.1_1_CHECKBOX"> SEC III 2.3.1 1 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_III_2.3.1_2_CHECKBOX"> SEC III 2.3.1 2 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_III_2.3.1_3_CHECKBOX"> SEC III 2.3.1 3 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_III_2.3.1_4_CHECKBOX"> SEC III 2.3.1 4 CHECKBOX</label>
+<label>SEC III 2.1 1:<input type="text" name="SEC_III_2.1_1"></label>
+<label>SEC III 2.3 1:<input type="text" name="SEC_III_2.3_1"></label>
+<label>SEC III 2.3 2:<input type="text" name="SEC_III_2.3_2"></label>
+<label>SEC III 2.3 3:<input type="text" name="SEC_III_2.3_3"></label>
+<label>SEC III 2.3 4:<input type="text" name="SEC_III_2.3_4"></label>
+<label>SEC III 2.3 5:<input type="text" name="SEC_III_2.3_5"></label>
+<label>SEC III 2.3 6:<input type="text" name="SEC_III_2.3_6"></label>
+<label>SEC III 2.2 1:<input type="text" name="SEC_III_2.2_1"></label>
+<label>SEC III 2.2 2:<input type="text" name="SEC_III_2.2_2"></label>
+<label>SEC III 2.2 3:<input type="text" name="SEC_III_2.2_3"></label>
+<label>SEC III 2.1 2:<input type="text" name="SEC_III_2.1_2"></label>
+<label>SEC III 2.1 3:<input type="text" name="SEC_III_2.1_3"></label>
+<label>SEC III 2.1 4:<input type="text" name="SEC_III_2.1_4"></label>
+<label>SEC III 2.1 5:<input type="text" name="SEC_III_2.1_5"></label>
+<label>SEC III 2.1 6:<input type="text" name="SEC_III_2.1_6"></label>
+<label>SEC III 2.1 7:<input type="text" name="SEC_III_2.1_7"></label>
+<label>SEC III 2.1 8:<input type="text" name="SEC_III_2.1_8"></label>
+<label>SEC III 2.1 9:<input type="text" name="SEC_III_2.1_9"></label>
+<label>SEC III 1.1 1:<input type="text" name="SEC_III_1.1_1"></label>
+<label>SEC III 1.1 2:<input type="text" name="SEC_III_1.1_2"></label>
+<label>SEC III 1.1 3:<input type="text" name="SEC_III_1.1_3"></label>
+<label>SEC III 1.2 1:<input type="text" name="SEC_III_1.2_1"></label>
+<label>SEC III 1.2 2:<input type="text" name="SEC_III_1.2_2"></label>
+<label>SEC III 1.2 3:<input type="text" name="SEC_III_1.2_3"></label>
+<label>SEC III 1.2 4:<input type="text" name="SEC_III_1.2_4"></label>
+<label>SEC III 1.3 1:<input type="text" name="SEC_III_1.3_1"></label>
+<label>SEC III 1.3 2:<input type="text" name="SEC_III_1.3_2"></label>
+<label>SEC III 1.3 3:<input type="text" name="SEC_III_1.3_3"></label>
+<label>SEC III 1.3 4:<input type="text" name="SEC_III_1.3_4"></label>
+<label>SEC III 1.1 4:<input type="text" name="SEC_III_1.1_4"></label>
+<label>SEC III 4,1 1 OBS:<textarea name="SEC_III_4,1_1_OBS"></textarea></label>
+</div>
+<button type="button" class="accordion">Seção IV</button>
+<div class="panel">
+<label>SEC IV 1:<input type="text" name="SEC_IV_1"></label>
+<label>SEC IV 2:<input type="text" name="SEC_IV_2"></label>
+<label>SEC IV 3:<input type="text" name="SEC_IV_3"></label>
+<label>SEC IV 4:<input type="text" name="SEC_IV_4"></label>
+<label>SEC IV 5:<input type="text" name="SEC_IV_5"></label>
+<label>SEC IV 6:<input type="text" name="SEC_IV_6"></label>
+<label>SEC IV 8:<input type="text" name="SEC_IV_8"></label>
+<label>SEC IV 9:<input type="text" name="SEC_IV_9"></label>
+<label>SEC IV 10:<input type="text" name="SEC_IV_10"></label>
+<label>SEC IV 7:<input type="text" name="SEC_IV_7"></label>
+</div>
+<button type="button" class="accordion">Seção V</button>
+<div class="panel">
+<label><input type="checkbox" name="SEC_V_CHECKBOX_5"> SEC V CHECKBOX 5</label>
+<label><input type="checkbox" name="SEC_V_CHECKBOX_4"> SEC V CHECKBOX 4</label>
+<label><input type="checkbox" name="SEC_V_CHECKBOX_3"> SEC V CHECKBOX 3</label>
+<label><input type="checkbox" name="SEC_V_CHECKBOX_2"> SEC V CHECKBOX 2</label>
+<label><input type="checkbox" name="SEC_V_CHECKBOX_1"> SEC V CHECKBOX 1</label>
+<label>SEC V 6 4 OBS:<textarea name="SEC_V_6_4_OBS"></textarea></label>
+<label>SEC V 1 1:<input type="text" name="SEC_V_1_1"></label>
+<label>SEC V 1 2:<input type="text" name="SEC_V_1_2"></label>
+<label>SEC V 1 3:<input type="text" name="SEC_V_1_3"></label>
+<label>SEC V 1 4:<input type="text" name="SEC_V_1_4"></label>
+<label>SEC V 1 5:<input type="text" name="SEC_V_1_5"></label>
+<label>SEC V 1 6:<input type="text" name="SEC_V_1_6"></label>
+<label>SEC V 2  OBS:<textarea name="SEC_V_2__OBS"></textarea></label>
+<label><input type="checkbox" name="SEC_V_2_1_CHECKBOX"> SEC V 2 1 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_V_2_2_CHECKBOX"> SEC V 2 2 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_V_2_3_CHECKBOX"> SEC V 2 3 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_V_2_4_CHECKBOX"> SEC V 2 4 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_V_2_5_CHECKBOX"> SEC V 2 5 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_V_2_6_CHECKBOX"> SEC V 2 6 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_V_2_7_CHECKBOX"> SEC V 2 7 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_V_2_8_CHECKBOX"> SEC V 2 8 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_V_2_9_CHECKBOX"> SEC V 2 9 CHECKBOX</label>
+<label><input type="checkbox" name="SEC_V_2_10_CHECKBOX"> SEC V 2 10 CHECKBOX</label>
+<label>SEC V 2 1 OBS:<textarea name="SEC_V_2_1_OBS"></textarea></label>
+<label>SEC V 2 2 OBS:<textarea name="SEC_V_2_2_OBS"></textarea></label>
+<label>SEC V 2 3 OBS:<textarea name="SEC_V_2_3_OBS"></textarea></label>
+<label>SEC V 2 4 OBS:<textarea name="SEC_V_2_4_OBS"></textarea></label>
+<label>SEC V 2 5 OBS:<textarea name="SEC_V_2_5_OBS"></textarea></label>
+<label>SEC V 2 6 OBS:<textarea name="SEC_V_2_6_OBS"></textarea></label>
+<label>SEC V 2 7 OBS:<textarea name="SEC_V_2_7_OBS"></textarea></label>
+<label>SEC V 2 8 OBS:<textarea name="SEC_V_2_8_OBS"></textarea></label>
+<label>SEC V 2 9 OBS:<textarea name="SEC_V_2_9_OBS"></textarea></label>
+</div>
 
-  <!-- Cabeçalho -->
-  <div style="padding: 15px; background: white; margin-bottom: 10px;">
-    <label>Nome da Creche:
-      <input type="text" name="creche" required>
-    </label>
-    <label>Turma:
-      <input type="text" name="turma" required>
-    </label>
-    <label>Turno:
-      <input type="text" name="turno" required>
-    </label>
-  </div>
-
-  <!-- Seção I -->
-  <div class="accordion">
-    <button type="button">Seção I - Apropriação do Currículo</button>
-    <div class="panel">
-      <label>Impactos negativos das interações inadequadas (SEC_I_1):
-        <select name="SEC_I_1">
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		</select>
-      </label>
-      <label>Clareza sobre objetivos da Educação Infantil (SEC_I_2):
-        <select name="SEC_I_2">
-        <option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		</select>
-      </label>
-      <label>Compreende que o papel vai além do cuidar (SEC_I_3):
-        <select name="SEC_I_3">
-        <option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		</select>
-      </label>
-      <label>Reconhece a importância das competências gerais BNCC (SEC_I_4):
-        <select name="SEC_I_4">
-        <option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		</select>
-      </label>
-      <label>Reconhece a importância da alfabetização (SEC_I_5):
-        <select name="SEC_I_5">
-        <option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-		</select>
-      </label>
-    </div>
-  </div>
-
-  <!-- Seção II -->
-  <div class="accordion">
-    <button type="button">Seção II - Planejamento Pedagógico</button>
-    <div class="panel">
-      <label>Planejamento baseado no diagnóstico (SEC_II_1):
-        <textarea name="SEC_II_1"></textarea>
-      </label>
-      <label>Adequação pedagógica (SEC_II_2):
-        <textarea name="SEC_II_2"></textarea>
-      </label>
-      <!-- Continua com todos os campos da seção II -->
-    </div>
-  </div>
-
-  <!-- Seção III -->
-  <div class="accordion">
-    <button type="button">Seção III - Mediação Docente</button>
-    <div class="panel">
-      <label>Professora(s):
-        <input type="text" name="SEC_III_PROFESSORA">
-      </label>
-      <label>Turma:
-        <input type="text" name="SEC_III_TURMA">
-      </label>
-      <label>Observador(a):
-        <input type="text" name="SEC_III_OBSERVADOR">
-      </label>
-      <!-- Continua com os checkboxes e campos da Seção III -->
-    </div>
-  </div>
-
-  <!-- Seção IV -->
-  <div class="accordion">
-    <button type="button">Seção IV - Avaliação e Registro</button>
-    <div class="panel">
-      <label>A avaliação é usada para replanejar? (SEC_IV_1)
-        <select name="SEC_IV_1">
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-      </label>
-      <!-- Continua com todos os campos da Seção IV -->
-    </div>
-  </div>
-
-  <!-- Seção V -->
-  <div class="accordion">
-    <button type="button">Seção V - Acolhimento Afetivo</button>
-    <div class="panel">
-      <label>Como você tem se sentido? (SEC_V_1_1)
-        <textarea name="SEC_V_1_1"></textarea>
-      </label>
-      <label>Tem equilíbrio trabalho/lazer? (SEC_V_1_2)
-        <textarea name="SEC_V_1_2"></textarea>
-      </label>
-      <!-- Continua com todos os campos da Seção V -->
-    </div>
-  </div>
-
-  <button type="submit" class="submit-btn">Gerar PDF</button>
-  <button type="reset" class="reset-btn">Novo Formulário</button>
-  <a id="whatsapp-share" href="#" target="_blank" class="whatsapp-btn">Compartilhar no WhatsApp</a>
+<br>
+<button type="submit">Gerar PDF</button>
+<button type="reset">Novo Formulário</button>
+<a id="whatsapp-share" class="btn" target="_blank">Compartilhar no WhatsApp</a>
 </form>
-
-<script src="pdf-lib.min.js"></script>
+</div>
 <script src="script.js"></script>
 <script>
-  // Accordion logic
-  const accButtons = document.querySelectorAll(".accordion button");
-  accButtons.forEach(btn => {
-    btn.addEventListener("click", function() {
-      accButtons.forEach(b => {
-        if (b !== this) {
-          b.classList.remove("active");
-          b.nextElementSibling.style.display = "none";
-        }
-      });
-      this.classList.toggle("active");
-      const panel = this.nextElementSibling;
-      panel.style.display = panel.style.display === "block" ? "none" : "block";
-    });
+const acc = document.getElementsByClassName("accordion");
+for (let i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    for (let j = 0; j < acc.length; j++) {
+      if (j !== i) { acc[j].classList.remove("active"); acc[j].nextElementSibling.style.display = "none"; }
+    }
+    this.classList.toggle("active");
+    const panel = this.nextElementSibling;
+    panel.style.display = panel.style.display === "block" ? "none" : "block";
   });
+}
 </script>
-
 </body>
 </html>
