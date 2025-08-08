@@ -34,18 +34,40 @@ document.getElementById("formulario").addEventListener("submit", async function 
     }
   }
 
-  // Percorre todos os campos enviados
+  // Função para lidar com campos de escolha (radio, combo, etc.)
+  function setChoiceIfExists(fieldName, value) {
+    try {
+      const field = form.getField(fieldName);
+      if (field.constructor.name === "PDFCheckBox") {
+        if (value && value !== "0") field.check();
+      } else if (field.constructor.name === "PDFRadioGroup") {
+        field.select(value);
+      } else {
+        field.setText(value || "");
+      }
+    } catch (e) {
+      console.warn(`Campo de escolha não encontrado: ${fieldName}`);
+    }
+  }
+
+  // Campos de escolha da Seção I
+  setChoiceIfExists("SEC_I_1", data.SEC_I_1);
+  setChoiceIfExists("SEC_I_2", data.SEC_I_2);
+  setChoiceIfExists("SEC_I_3", data.SEC_I_3);
+  setChoiceIfExists("SEC_I_4", data.SEC_I_4);
+  setChoiceIfExists("SEC_I_5", data.SEC_I_5);
+
+  // Agora percorre o resto dos campos do formulário
   for (const key in data) {
+    if (key.startsWith("SEC_I_")) continue; // já tratados
     if (key.toLowerCase().includes("checkbox")) {
-      // Campos checkbox no HTML: valor "on" significa marcado
       checkIfExists(key, data[key] === "on" || data[key] === true || data[key] === "true");
     } else {
-      // Campos de texto ou select
       setTextIfExists(key, data[key]);
     }
   }
 
-  // Mantém o PDF editável (não usar flatten)
+  // Mantém o PDF editável
   const pdfBytes = await pdfDoc.save();
 
   // Gera o arquivo para download
