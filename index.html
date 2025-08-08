@@ -1,32 +1,233 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Acompanhamento Pedagógico</title>
+<meta charset="UTF-8">
+<title>Acompanhamento Pedagógico</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f5f5f5;
+  }
+  h1 {
+    background: #4CAF50;
+    color: white;
+    margin: 0;
+    padding: 15px;
+    text-align: center;
+  }
+  .accordion {
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+  }
+  .accordion button {
+    width: 100%;
+    text-align: left;
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #e0e0e0;
+  }
+  .accordion button.active {
+    background: #ccc;
+  }
+  .panel {
+    display: none;
+    background-color: white;
+    padding: 15px;
+  }
+  label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    box-sizing: border-box;
+  }
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .checkbox-group label {
+    font-weight: normal;
+  }
+  button.submit-btn, button.reset-btn {
+    padding: 12px;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  button.submit-btn {
+    background: #4CAF50;
+    color: white;
+  }
+  button.reset-btn {
+    background: #f44336;
+    color: white;
+  }
+  a.whatsapp-btn {
+    display: block;
+    background: #25d366;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+</style>
 </head>
 <body>
-  <h1>Acompanhamento Pedagógico - Formulário</h1>
-  <form id="formulario">
-    <label>Nome da Creche: <input type="text" name="creche" required></label><br><br>
-    <label>Turma: <input type="text" name="turma" required></label><br><br>
-    <label>Turno: <input type="text" name="turno" required></label><br><br>
 
-    <label>Seção I - Compreensão sobre interações inadequadas:<br>
-      <select name="SEC_I_1">
-        <option value="1">[1] Não conhece</option>
-        <option value="2">[2] Reconhece, mas não partilha</option>
-        <option value="3">[3] Em processo</option>
-        <option value="4">[4] Sim, conhece e partilha</option>
-      </select>
-    </label><br><br>
+<h1>Acompanhamento Pedagógico</h1>
 
-    <button type="submit">Gerar PDF</button>
-    <button type="reset">Novo Formulário</button>
-  </form>
+<form id="formulario">
 
-  <a id="whatsapp-share" href="#" target="_blank">Compartilhar no WhatsApp</a>
+  <!-- Cabeçalho -->
+  <div style="padding: 15px; background: white; margin-bottom: 10px;">
+    <label>Nome da Creche:
+      <input type="text" name="creche" required>
+    </label>
+    <label>Turma:
+      <input type="text" name="turma" required>
+    </label>
+    <label>Turno:
+      <input type="text" name="turno" required>
+    </label>
+  </div>
 
-  <script src="pdf-lib.min.js"></script>
-  <script src="script.js"></script>
+  <!-- Seção I -->
+  <div class="accordion">
+    <button type="button">Seção I - Apropriação do Currículo</button>
+    <div class="panel">
+      <label>Impactos negativos das interações inadequadas (SEC_I_1):
+        <select name="SEC_I_1">
+          <option value="1">[1] Não conhece</option>
+          <option value="2">[2] Reconhece, mas não partilha</option>
+          <option value="3">[3] Em processo</option>
+          <option value="4">[4] Sim, conhece e partilha</option>
+        </select>
+      </label>
+      <label>Clareza sobre objetivos da Educação Infantil (SEC_I_2):
+        <select name="SEC_I_2">
+          <option value="1">[1] Não conhece</option>
+          <option value="2">[2] Reconhece, mas não partilha</option>
+          <option value="3">[3] Em processo</option>
+          <option value="4">[4] Sim, conhece e partilha</option>
+        </select>
+      </label>
+      <label>Compreende que o papel vai além do cuidar (SEC_I_3):
+        <select name="SEC_I_3">
+          <option value="1">[1] Não</option>
+          <option value="4">[4] Sim</option>
+        </select>
+      </label>
+      <label>Reconhece a importância das competências gerais BNCC (SEC_I_4):
+        <select name="SEC_I_4">
+          <option value="1">[1] Não</option>
+          <option value="4">[4] Sim</option>
+        </select>
+      </label>
+      <label>Reconhece a importância da alfabetização (SEC_I_5):
+        <select name="SEC_I_5">
+          <option value="1">[1] Não</option>
+          <option value="4">[4] Sim</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <!-- Seção II -->
+  <div class="accordion">
+    <button type="button">Seção II - Planejamento Pedagógico</button>
+    <div class="panel">
+      <label>Planejamento baseado no diagnóstico (SEC_II_1):
+        <textarea name="SEC_II_1"></textarea>
+      </label>
+      <label>Adequação pedagógica (SEC_II_2):
+        <textarea name="SEC_II_2"></textarea>
+      </label>
+      <!-- Continua com todos os campos da seção II -->
+    </div>
+  </div>
+
+  <!-- Seção III -->
+  <div class="accordion">
+    <button type="button">Seção III - Mediação Docente</button>
+    <div class="panel">
+      <label>Professora(s) (SEC_III_PROFESSORA):
+        <input type="text" name="SEC_III_PROFESSORA">
+      </label>
+      <label>Turma (SEC_III_TURMA):
+        <input type="text" name="SEC_III_TURMA">
+      </label>
+      <label>Observador(a) (SEC_III_OBSERVADOR):
+        <input type="text" name="SEC_III_OBSERVADOR">
+      </label>
+      <!-- Continua com os checkboxes e campos da Seção III -->
+    </div>
+  </div>
+
+  <!-- Seção IV -->
+  <div class="accordion">
+    <button type="button">Seção IV - Avaliação e Registro</button>
+    <div class="panel">
+      <label>A avaliação é usada para replanejar? (SEC_IV_1)
+        <select name="SEC_IV_1">
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </label>
+      <!-- Continua com todos os campos da Seção IV -->
+    </div>
+  </div>
+
+  <!-- Seção V -->
+  <div class="accordion">
+    <button type="button">Seção V - Acolhimento Afetivo</button>
+    <div class="panel">
+      <label>Como você tem se sentido? (SEC_V_1_1)
+        <textarea name="SEC_V_1_1"></textarea>
+      </label>
+      <label>Tem equilíbrio trabalho/lazer? (SEC_V_1_2)
+        <textarea name="SEC_V_1_2"></textarea>
+      </label>
+      <!-- Continua com todos os campos da Seção V -->
+    </div>
+  </div>
+
+  <button type="submit" class="submit-btn">Gerar PDF</button>
+  <button type="reset" class="reset-btn">Novo Formulário</button>
+  <a id="whatsapp-share" href="#" target="_blank" class="whatsapp-btn">Compartilhar no WhatsApp</a>
+</form>
+
+<script src="pdf-lib.min.js"></script>
+<script src="script.js"></script>
+<script>
+  // Accordion logic
+  const accButtons = document.querySelectorAll(".accordion button");
+  accButtons.forEach(btn => {
+    btn.addEventListener("click", function() {
+      accButtons.forEach(b => {
+        if (b !== this) {
+          b.classList.remove("active");
+          b.nextElementSibling.style.display = "none";
+        }
+      });
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling;
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    });
+  });
+</script>
+
 </body>
 </html>
