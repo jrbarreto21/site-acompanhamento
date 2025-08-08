@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Acompanhamento Pedagógico</title>
+</head>
+<body>
+  <h1>Acompanhamento Pedagógico - Formulário</h1>
+  <form id="formulario">
+    <label>Nome da Creche: <input type="text" name="creche" required></label><br><br>
+    <label>Turma: <input type="text" name="turma" required></label><br><br>
+    <label>Turno: <input type="text" name="turno" required></label><br><br>
+
+    <label>Seção I - Compreensão sobre interações inadequadas:<br>
+      <select name="SEC_I_1">
+        <option value="1">[1] Não conhece</option>
+        <option value="2">[2] Reconhece, mas não partilha</option>
+        <option value="3">[3] Em processo</option>
+        <option value="4">[4] Sim, conhece e partilha</option>
+      </select>
+    </label><br><br>
+
+    <button type="submit">Gerar PDF</button>
+    <button type="reset">Novo Formulário</button>
+  </form>
+
+  <a id="whatsapp-share" href="#" target="_blank">Compartilhar no WhatsApp</a>
+
+  <script src="pdf-lib.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
