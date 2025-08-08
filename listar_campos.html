@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Listar campos PDF</title>
+</head>
+<body>
+<h2>Abra o console (F12 → Console) para ver a lista de campos do PDF</h2>
+
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+<script>
+(async () => {
+  const existingPdfBytes = await fetch("Acompanhamentobase.pdf").then(res => res.arrayBuffer());
+  const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+  const form = pdfDoc.getForm();
+
+  const fields = form.getFields();
+  fields.forEach(f => {
+    console.log("Nome do campo:", f.getName());
+  });
+
+  console.log("✅ Lista concluída. Copie tudo daqui para me enviar.");
+})();
+</script>
+</body>
+</html>
