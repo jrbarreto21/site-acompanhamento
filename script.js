@@ -5,7 +5,10 @@ document.getElementById("formulario").addEventListener("submit", async function 
   const data = {};
   formData.forEach((value, key) => data[key] = value);
 
-  const existingPdfBytes = await fetch("Acompanhamentobase.pdf").then(res => res.arrayBuffer());
+  const existingPdfBytes = await fetch("Acompanhamentobase.pdf").then(res => {
+    if (!res.ok) throw new Error("Falha ao carregar Acompanhamentobase.pdf: " + res.status);
+    return res.arrayBuffer();
+  });
   const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
   const form = pdfDoc.getForm();
 
@@ -19,7 +22,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
     } catch {}
     try {
       if (form.getCheckBox(fieldName)) {
-        if (value === "on" || value === true || value === "true" || value === "1") {
+        if (value === "on" || value === true || value === "true" || value === "1" || String(value).toLowerCase()==="sim") {
           form.getCheckBox(fieldName).check();
         } else {
           form.getCheckBox(fieldName).uncheck();
@@ -56,14 +59,38 @@ document.getElementById("formulario").addEventListener("submit", async function 
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const url = URL.createObjectURL(blob);
 
-  // Baixa o PDF
+  // --- Monta o nome do arquivo usando os campos do formulário ---
+  // Tentamos pegar os nomes exatamente como no seu index.html: "creche", "turma", "turno".
+  // Se no seu HTML os names forem diferentes, substitua aqui pelos nomes corretos.
+  const crecheRaw = data.creche || data['Nome da Creche'] || '';
+  const turmaRaw  = data.turma  || data['Turma'] ||  '';
+  const turnoRaw  = data.turno  || data['Turno'] || '';
+
+  function sanitizeFilename(str) {
+    // remove diacríticos, caracteres inválidos e converte espaços para underscore
+    return String(str || '')
+      .normalize('NFKD')                     // separa diacríticos
+      .replace(/[\u0300-\u036f]/g, '')       // remove acentos
+      .replace(/[^a-zA-Z0-9 _-]/g, '')      // permite apenas letras, números, space, underscore e hífen
+      .trim()
+      .replace(/\s+/g, '_')                 // espaços -> _
+      || 'SemValor';
+  }
+
+  const nomeArquivo = `Acompanhamento-${sanitizeFilename(crecheRaw)}-${sanitizeFilename(turmaRaw)}-${sanitizeFilename(turnoRaw)}.pdf`;
+
+  // Baixa o PDF com o nome gerado
   const link = document.createElement("a");
   link.href = url;
-  link.download = "acompanhamento_"creche"_"turno"_"turma".pdf";
+  link.download = nomeArquivo;
+  document.body.appendChild(link);
   link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 
-  // Link para WhatsApp
+  // Atualiza link WhatsApp (nota: blob URL não é útil para compartilhar fora do dispositivo; aqui só notificamos o nome)
   document.getElementById("whatsapp-share").href =
-    "https://wa.me/?text=" + encodeURIComponent("Segue o PDF preenchido: " + url);
-});
+    "https://wa.me/?text=" + encodeURIComponent("PDF gerado: " + nomeArquivo + " (baixado localmente).");
 
+  console.log("PDF gerado:", nomeArquivo);
+});
