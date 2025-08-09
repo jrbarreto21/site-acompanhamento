@@ -66,4 +66,3 @@ document.getElementById("formulario").addEventListener("submit", async function 
   document.getElementById("whatsapp-share").href =
     "https://wa.me/?text=" + encodeURIComponent("Segue o PDF preenchido: " + url);
 });
-´´´´´´´´´´
