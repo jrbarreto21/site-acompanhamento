@@ -25,11 +25,11 @@ button:hover, a.btn:hover { background-color: #218838; }
 <button type="button" class="accordion">Seção I</button>
 <div class="panel">
 <label>Data da observação:<textarea name="Data da observação"></textarea></label>
-<label>SEC I 1:<select name="SEC_I_1"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
-<label>SEC I 2:<select name="SEC_I_2"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
-<label>SEC I 3:<select name="SEC_I_3"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
-<label>SEC I 4:<select name="SEC_I_4"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
-<label>SEC I 5:<select name="SEC_I_5"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></label>
+<label>SEC I 1:<select name="SEC_I_2"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+<label>SEC I 2:<select name="SEC_I_1"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+<label>SEC I 3:<select name="SEC_I_3"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+<label>SEC I 4:<select name="SEC_I_4"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
+<label>SEC I 5:<select name="SEC_I_5"><option value="">Selecione</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></label>
 </div>
 <button type="button" class="accordion">Seção II</button>
 <div class="panel">
@@ -204,6 +204,7 @@ button:hover, a.btn:hover { background-color: #218838; }
 <a id="whatsapp-share" class="btn" target="_blank">Compartilhar no WhatsApp</a>
 </form>
 </div>
+<script src="script.js"></script>
 <script>
 const acc = document.getElementsByClassName("accordion");
 for (let i = 0; i < acc.length; i++) {
@@ -216,53 +217,6 @@ for (let i = 0; i < acc.length; i++) {
     panel.style.display = panel.style.display === "block" ? "none" : "block";
   });
 }
-
-document.getElementById("formulario").addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const existingPdfBytes = await fetch("Acompanhamentobase.pdf").then(res => res.arrayBuffer());
-    const { PDFDocument } = PDFLib;
-    const pdfDoc = await PDFDocument.load(existingPdfBytes);
-    const form = pdfDoc.getForm();
-    const dados = new FormData(this);
-    for (let [nomeCampo, valor] of dados.entries()) {
-        try {
-            let field = form.getField(nomeCampo);
-            if (field.constructor.name === "PDFTextField") {
-                field.setText(valor || "");
-            } 
-            else if (field.constructor.name === "PDFCheckBox") {
-                if (valor === "on" || valor === true || valor === "true") {
-                    field.check();
-                } else {
-                    field.uncheck();
-                }
-            } 
-            else if (field.constructor.name === "PDFDropdown") {
-                if (valor) field.select(valor);
-            } 
-            else if (field.constructor.name === "PDFRadioGroup") {
-                if (valor) field.select(valor);
-            } 
-            else {
-                console.warn(`Tipo de campo não tratado: ${nomeCampo}`);
-            }
-        } catch (err) {
-            console.warn(`Campo não encontrado no PDF: ${nomeCampo}`);
-        }
-    }
-    const pdfBytes = await pdfDoc.save();
-    const blob = new Blob([pdfBytes], { type: "application/pdf" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "acompanhamento_preenchido.pdf";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-    document.getElementById("whatsapp-share").href =
-        `https://api.whatsapp.com/send?text=Segue%20o%20PDF%20preenchido:%20${encodeURIComponent(window.location.origin + "/acompanhamento_preenchido.pdf")}`;
-});
 </script>
 </body>
 </html>
