@@ -77,7 +77,7 @@ document.getElementById("formulario").addEventListener("submit", async function 
       || 'SemValor';
   }
 
-  const nomeArquivo = `Acompanhamento-${sanitizeFilename(crecheRaw)}-${sanitizeFilename(turmaRaw)}-${sanitizeFilename(turnoRaw)}.pdf`;
+  const nomeArquivo = `Acompanhamento_${sanitizeFilename(crecheRaw)}_${sanitizeFilename(turmaRaw)}_${sanitizeFilename(turnoRaw)}.pdf`;
 
   // Baixa o PDF com o nome gerado
   const link = document.createElement("a");
