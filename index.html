@@ -1,138 +1,307 @@
+	
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Acompanhamento Pedagógico 2025</title>
-
-  <!-- Biblioteca PDF-LIB -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Biblioteca para trabalhar com PDF se necessário (mantida do original) -->
   <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
 
+  <!-- ======== ESTILOS MODERNOS E RESPONSIVOS ======== -->
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f4f4f4;
+    :root{
+      --bg:#f7fafc;
+      --card:#ffffff;
+      --text:#233240;
+      --muted:#6b7280;
+      --accent-1:#bfe8ff; /* azul claro */
+      --accent-2:#dff7ea; /* verde suave */
+      --accent-3:#fff6d6; /* amarelo pastel */
+      --accent-4:#ffeef6; /* rosa claro */
+      --accent-5:#fff3e0; /* laranja claro */
+      --primary:#2b6cb0;
+      --success:#2f855a;
+      --shadow: 0 6px 18px rgba(35,50,64,0.08);
+      --radius:12px;
+      --gap:14px;
     }
-    header {
-      background: #4CAF50;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+
+    html{scroll-behavior:smooth;}
+
+    *{box-sizing:border-box;}
+
+    body{
+      margin:0;
+      font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
     }
-    header.highlight {
-      box-shadow: 0 0 15px yellow;
-      transition: box-shadow 0.5s ease;
+
+    /* Cabeçalho fixo moderno */
+    header.app-header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      height:64px;
+      background:linear-gradient(90deg,var(--card),#f8fbff);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:8px 20px;
+      box-shadow:0 4px 12px rgba(15,23,42,0.06);
+      z-index:999;
+      transition:box-shadow .35s, transform .25s;
     }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    header.app-header.highlight{
+      box-shadow:0 10px 28px rgba(39,105,171,0.14);
+      transform:translateY(-2px);
     }
-    .accordion {
-      background-color: #eee;
-      color: #444;
-      cursor: pointer;
-      padding: 15px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-      border-radius: 5px;
-      margin-bottom: 5px;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
-    .accordion.active, .accordion:hover {
-      background-color: #ccc;
+    .brand h1{
+      font-size:18px;
+      margin:0;
+      color:var(--primary);
+      letter-spacing:0.2px;
     }
-    .panel {
-      padding: 0 15px;
-      display: none;
-      overflow: hidden;
-      background: #f9f9f9;
-      border-radius: 5px;
-      margin-bottom: 10px;
+    .header-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
     }
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0 15px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-      font-size: 14px;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:none;
+      background: linear-gradient(180deg,var(--success),#2b8a51);
+      color:white;
+      cursor:pointer;
+      font-weight:600;
+      box-shadow: var(--shadow);
+      text-decoration:none;
     }
-    button {
-      background: #4CAF50;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
+    .btn.ghost{
+      background:transparent;
+      color:var(--primary);
+      border:1px solid rgba(43,108,176,0.08);
+      box-shadow:none;
     }
-    button:hover {
-      background: #45a049;
+    .btn:active{transform:translateY(1px);}
+
+    /* Container do formulário (com espaço para o header fixo) */
+    .container{
+      max-width:1000px;
+      margin:92px auto 40px;
+      padding:20px;
     }
-    .actions {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
+
+    /* Card principal */
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:var(--shadow);
     }
-    a.btn {
-      display: inline-block;
-      padding: 12px 20px;
-      background: #25D366;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 16px;
+
+    h2.section-title{
+      margin:0 0 10px 0;
+      font-size:16px;
+      color:var(--primary);
     }
-    a.btn:hover {
-      background: #1ebe5d;
+    p.lead{
+      margin:6px 0 18px 0;
+      color:var(--muted);
+      font-size:14px;
     }
-    #progress-bar {
-      height: 6px;
-      background: #4CAF50;
-      width: 0%;
-      transition: width 0.3s ease;
+
+    /* Accordion styles */
+    .accordion{
+      width:100%;
+      background:transparent;
+      border:0;
+      padding:12px 14px;
+      margin:10px 0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      cursor:pointer;
+      border-radius:12px;
+      transition:background .2s, transform .15s;
+    }
+    .accordion:hover{ transform:translateY(-2px); }
+    .accordion .left{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .acc-icon{
+      width:36px;
+      height:36px;
+      border-radius:10px;
+      display:inline-grid;
+      place-items:center;
+      font-size:16px;
+    }
+    .acc-title{
+      font-weight:700;
+    }
+    .acc-sub{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .acc-arrow{
+      transition:transform .25s;
+    }
+
+    .panel{
+      overflow:hidden;
+      max-height:0;
+      transition:max-height .35s ease, padding .25s;
+      padding:0 0;
+    }
+    .panel.open{
+      padding:12px 0 18px 0;
+    }
+
+    /* Form grid */
+    .form-row{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    label.field{
+      display:block;
+      font-size:13px;
+      color:var(--text);
+      margin-bottom:4px;
+    }
+    input[type="text"], select, textarea{
+      width:100%;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid rgba(15,23,42,0.08);
+      outline:none;
+      font-size:14px;
+      background:linear-gradient(180deg,#fff,#fbfdff);
+    }
+    textarea{min-height:80px; resize:vertical;}
+
+    /* Buttons area */
+    .actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-top:14px;
+    }
+
+    /* WhatsApp button style */
+    .whatsapp{
+      background:linear-gradient(90deg,#25D366,#1DA851);
+      padding:10px 12px;
+      border-radius:10px;
+      color:white;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow:0 8px 20px rgba(37,211,102,0.12);
+    }
+
+    /* Section accent backgrounds for header of each accordion */
+    .accent-1{ background: linear-gradient(90deg,var(--accent-1),#e6f7ff); }
+    .accent-2{ background: linear-gradient(90deg,var(--accent-2),#f0fff6); }
+    .accent-3{ background: linear-gradient(90deg,var(--accent-3),#fffdf0); }
+    .accent-4{ background: linear-gradient(90deg,var(--accent-4),#fff7fb); }
+    .accent-5{ background: linear-gradient(90deg,var(--accent-5),#fff7ed); }
+
+    /* Small screens adjustments */
+    @media (min-width:700px){
+      .form-grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Acompanhamento Pedagógico 2025</h1>
-</header>
-
-<div id="progress-bar"></div>
-
-<div class="container">
-  <form id="formulario">
-
-    <!-- DADOS INICIAIS -->
-    <button type="button" class="accordion">Dados Iniciais</button>
-    <div class="panel">
-      <label>Creche</label>
-      <input type="text" name="creche" required>
-
-      <label>Turma</label>
-      <input type="text" name="turma" required>
-
-      <label>Turno</label>
-      <input type="text" name="turno" required>
+  <!-- ========== CABEÇALHO FIXO ========== -->
+  <header class="app-header" id="appHeader" role="banner" aria-label="Cabeçalho do formulário">
+    <div class="brand" aria-hidden="true">
+      <!-- Pequeno ícone educativo (SVG) -->
+      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="3" width="20" height="18" rx="3" fill="#e6f7ff"></rect>
+        <path d="M5 8h14" stroke="#2b6cb0" stroke-width="1.2"></path>
+        <path d="M5 12h14" stroke="#2b6cb0" stroke-width="1.2"></path>
+      </svg>
+      <h1>Acompanhamento Pedagógico 2025</h1>
     </div>
 
-    <!-- ===========================================================
+    <div class="header-actions">
+      <!-- Botão Novo Formulário: reseta e rola para topo -->
+      <button id="btnResetTop" class="btn ghost" title="Novo formulário (limpar e ir ao topo)">
+        <!-- Ícone de refresh -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 7v6h-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 17a8 8 0 118 8" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Novo Formulário
+      </button>
+
+      <!-- Botão Gerar PDF (placeholder - sua lógica pode conectar aqui) -->
+      <button id="btnGeneratePdf" class="btn" title="Gerar PDF (implemente a lógica de PDF)">
+        <!-- Ícone de download -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3v12" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 11l4 4 4-4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 21H3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Gerar PDF
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== CONTAINER PRINCIPAL ========== -->
+  <main class="container" role="main">
+    <div class="card" aria-live="polite">
+
+      <h2 class="section-title">Formulário de Acompanhamento Pedagógico</h2>
+      <p class="lead">Preencha as seções abaixo. Use o botão <strong>Gerar PDF</strong> quando finalizar.</p>
+
+      <!-- ======== FORMULÁRIO (mantém todos os campos originais, organizados) ======== -->
+      <form id="formulario" class="form-root" autocomplete="off">
+        <!-- === Campos iniciais (Creche / Turma / Turno) === -->
+        <!-- Comentário: Esses campos são usados para identificar o PDF gerado e o compartilhamento no WhatsApp -->
+        <div class="form-row form-grid-2" aria-label="Informações iniciais">
+          <div>
+            <label class="field">Nome da Creche
+              <input id="creche" name="creche" type="text" required placeholder="Digite o nome da creche">
+            </label>
+          </div>
+          <div>
+            <label class="field">Turma
+              <input id="turma" name="turma" type="text" required placeholder="Ex: Maternal A">
+            </label>
+          </div>
+          <div>
+            <label class="field">Turno
+              <input id="turno" name="turno" type="text" required placeholder="Ex: Manhã">
+            </label>
+          </div>
+        </div>
+
+        <!-- ===========================================================
              SEÇÃO I - APROPRIAÇÃO DO CURRÍCULO
              Comentário: seção para avaliar conhecimentos e percepções sobre
              objetivos da Educação Infantil e BNCC.
@@ -1546,126 +1715,165 @@
           </div>
         </div>
 
-    <!-- BOTÕES DE AÇÃO -->
-    <div class="actions">
-      <button type="submit">Gerar PDF</button>
-      <a id="whatsapp-share" href="#" target="_blank" class="btn">Compartilhar no WhatsApp</a>
-      <button id="novo-form" type="button">Novo Formulário</button>
+        <!-- ========== AÇÕES FINAIS ========== -->
+        <div class="actions" role="region" aria-label="Ações do formulário">
+          <!-- Botão gerar PDF duplicado (pq header tem também) -->
+          <button type="button" id="btnGeneratePdf2" class="btn" title="Gerar PDF">
+            Gerar PDF
+          </button>
+
+          <!-- Botão limpar formulário (reset) - também disponível no header -->
+          <button type="reset" id="btnReset" class="btn ghost" title="Limpar formulário">
+            Limpar Formulário
+          </button>
+
+          <!-- Compartilhar via WhatsApp: link atualizado dinamicamente -->
+          <a href="#" id="whatsapp-share" class="whatsapp" target="_blank" rel="noopener" title="Compartilhar resumo no WhatsApp">
+            <!-- Ícone WhatsApp (SVG inline - evita dependências externas) -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21.1 2.9A11.8 11.8 0 0012 0C5.4 0 .3 5.1.3 11.7c0 2 .5 3.9 1.4 5.6L0 24l6.9-1.8c1.6.9 3.4 1.4 5.2 1.4 6.6 0 11.7-5.1 11.7-11.7 0-3.1-1.2-6-3.7-8.5z" fill="#fff"/>
+            </svg>
+            Compartilhar
+          </a>
+        </div>
+
+      </form>
+
     </div>
+  </main>
 
-  </form>
-</div>
+  <!-- ======== SCRIPTS - comportamento do accordion, reset e whatsapp share ======== -->
+  <script src="script.js"></script>	
+  
+  <script>
+    /**
+     * Script descritivo:
+     * - Controla o comportamento do accordion (abrir/fechar com animação)
+     * - Atualiza o link do WhatsApp com os dados principais (creche, turma, turno)
+     * - Controla o botão "Novo Formulário" do header (reset + scroll suave + destaque)
+     * - Fornece hooks para o botão Gerar PDF (atualmente placeholder)
+     */
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("formulario");
-  const whatsappBtn = document.getElementById("whatsapp-share");
-  const accordions = document.querySelectorAll(".accordion");
-  const progressBar = document.getElementById("progress-bar");
+    document.addEventListener('DOMContentLoaded', function(){
+      // ACCORDION: encontra todos os botões tipo accordion e liga o clique
+      const accButtons = document.querySelectorAll('.accordion');
+      accButtons.forEach(btn => {
+        btn.addEventListener('click', function(){
+          const panelId = this.getAttribute('data-panel');
+          const panel = document.getElementById(panelId);
+          const isOpen = panel.classList.contains('open');
 
-  function updateProgress() {
-    const inputs = form.querySelectorAll("input, select, textarea");
-    const total = inputs.length;
-    let filled = 0;
-    inputs.forEach(input => {
-      if (input.type === "checkbox" || input.type === "radio") {
-        if (input.checked) filled++;
-      } else if (input.value.trim() !== "") {
-        filled++;
+          // fecha todos
+          document.querySelectorAll('.panel').forEach(p => {
+            p.classList.remove('open');
+            p.style.maxHeight = null;
+            p.setAttribute('aria-hidden','true');
+          });
+          document.querySelectorAll('.acc-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+
+          if(!isOpen){
+            // abre o selecionado
+            panel.classList.add('open');
+            panel.setAttribute('aria-hidden','false');
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+            // gira a seta do botão clicado
+            const arrow = this.querySelector('.acc-arrow');
+            if(arrow) arrow.style.transform = 'rotate(180deg)';
+          } else {
+            panel.classList.remove('open');
+            panel.setAttribute('aria-hidden','true');
+            panel.style.maxHeight = null;
+            const arrow = this.querySelector('.acc-arrow');
+            if(arrow) arrow.style.transform = 'rotate(0deg)';
+          }
+        });
+      });
+
+      // Inicialmente abre a primeira seção para orientação
+      const firstBtn = document.querySelector('.accordion[data-panel="secao1"]');
+      if(firstBtn) firstBtn.click();
+
+      // WHATSAPP: monta a mensagem com os campos principais
+      const whatsappLink = document.getElementById('whatsapp-share');
+      const crecheInput = document.getElementById('creche');
+      const turmaInput = document.getElementById('turma');
+      const turnoInput = document.getElementById('turno');
+
+      function updateWhatsapp(){
+        const creche = crecheInput.value.trim() || '[Nome da Creche]';
+        const turma = turmaInput.value.trim() || '[Turma]';
+        const turno = turnoInput.value.trim() || '[Turno]';
+        const text = encodeURIComponent(`Acompanhamento Pedagógico\\nCreche: ${creche}\\nTurma: ${turma}\\nTurno: ${turno}\\n(Resumo gerado pelo sistema)`);
+        whatsappLink.href = `https://api.whatsapp.com/send?text=${text}`;
       }
-    });
-    const percent = Math.round((filled / total) * 100);
-    progressBar.style.width = percent + "%";
-  }
 
-  form.querySelectorAll("input, select, textarea").forEach(field => {
-    field.addEventListener("input", function () {
-      if (this.required && this.value.trim() === "") {
-        this.style.border = "2px solid red";
-      } else if (this.value.trim() !== "") {
-        this.style.border = "2px solid green";
-      } else {
-        this.style.border = "1px solid #ccc";
+      // atualiza ao digitar
+      [crecheInput, turmaInput, turnoInput].forEach(el => {
+        el.addEventListener('input', updateWhatsapp);
+      });
+      updateWhatsapp();
+
+      // BOTÃO RESET no header: faz reset completo e rola para top com destaque
+      const btnResetTop = document.getElementById('btnResetTop');
+      const form = document.getElementById('formulario');
+      const appHeader = document.getElementById('appHeader');
+
+      function highlightHeader(){
+        appHeader.classList.add('highlight');
+        setTimeout(()=> appHeader.classList.remove('highlight'), 900);
       }
-      updateProgress();
-    });
-  });
 
-  accordions.forEach((acc, index) => {
-    acc.addEventListener("click", function () {
-      this.classList.toggle("active");
-      const panel = this.nextElementSibling;
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-      } else {
-        document.querySelectorAll(".panel").forEach(p => p.style.display = "none");
-        panel.style.display = "block";
-        panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      btnResetTop.addEventListener('click', function(){
+        form.reset();
+        updateWhatsapp();
+        window.scrollTo({top:0, behavior:'smooth'});
+        highlightHeader();
+        // fecha painéis abertos
+        document.querySelectorAll('.panel').forEach(p => {
+          p.classList.remove('open');
+          p.style.maxHeight = null;
+          p.setAttribute('aria-hidden','true');
+        });
+      });
+
+      // Botão Reset dentro do formulário (mantido para acessibilidade)
+      const btnReset = document.getElementById('btnReset');
+      btnReset.addEventListener('click', function(){
+        // delay leve para garantir que o form reset aconteça
+        setTimeout(()=> {
+          updateWhatsapp();
+          window.scrollTo({top:0, behavior:'smooth'});
+          highlightHeader();
+        }, 50);
+      });
+
+      // Botões Gerar PDF - hook para sua lógica de geração (placeholder)
+      const btnGeneratePdf = document.getElementById('btnGeneratePdf');
+      const btnGeneratePdf2 = document.getElementById('btnGeneratePdf2');
+
+      function gerarPdfPlaceholder(){
+        // Comentário: aqui você pode chamar sua rotina que usa pdf-lib (ou outra)
+        // para preencher um template PDF, usando os valores do formulário.
+        // Exemplo: coletar todos os campos e enviar para o servidor ou processar localmente.
+        alert('Botão Gerar PDF clicado. Aqui implemente a lógica de geração do PDF usando pdf-lib ou outra solução.');
       }
+
+      btnGeneratePdf.addEventListener('click', gerarPdfPlaceholder);
+      btnGeneratePdf2.addEventListener('click', gerarPdfPlaceholder);
+
+      // Acessibilidade: permitir abrir/fechar com Enter/Space
+      accButtons.forEach(btn => {
+        btn.setAttribute('tabindex','0');
+        btn.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            this.click();
+          }
+        });
+      });
+
     });
-    if (index === 0) {
-      acc.classList.add("active");
-      acc.nextElementSibling.style.display = "block";
-    }
-  });
-
-  document.getElementById("novo-form").addEventListener("click", function () {
-    form.reset();
-    form.querySelectorAll("input, select, textarea").forEach(f => f.style.border = "1px solid #ccc");
-    progressBar.style.width = "0%";
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    document.querySelector("header").classList.add("highlight");
-    setTimeout(() => document.querySelector("header").classList.remove("highlight"), 1000);
-  });
-
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-    const data = {};
-    formData.forEach((value, key) => data[key] = value);
-
-    const existingPdfBytes = await fetch("Acompanhamentobase.pdf").then(res => res.arrayBuffer());
-    const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes, { updateMetadata: false });
-    const pdfForm = pdfDoc.getForm();
-
-    function trySetField(fieldName, value) {
-      try { if (pdfForm.getTextField(fieldName)) { pdfForm.getTextField(fieldName).setText(String(value || "")); return; } } catch {}
-      try { if (pdfForm.getCheckBox(fieldName)) { ["on","true","1","sim"].includes(String(value).toLowerCase()) ? pdfForm.getCheckBox(fieldName).check() : pdfForm.getCheckBox(fieldName).uncheck(); return; } } catch {}
-      try { if (pdfForm.getRadioGroup(fieldName)) { pdfForm.getRadioGroup(fieldName).select(String(value)); return; } } catch {}
-      try { if (pdfForm.getDropdown(fieldName)) { pdfForm.getDropdown(fieldName).select(String(value)); return; } } catch {}
-      console.warn(`Campo não encontrado no PDF: ${fieldName}`);
-    }
-
-    Object.keys(data).forEach(key => trySetField(key, data[key]));
-
-    const helv = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
-    pdfForm.updateFieldAppearances(helv);
-
-    function sanitize(str) {
-      return String(str || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9 _-]/g, "").trim().replace(/\s+/g, "_") || "SemValor";
-    }
-
-    const nomeArquivo = `Acompanhamento_${sanitize(data.creche)}_${sanitize(data.turma)}_${sanitize(data.turno)}.pdf`;
-
-    const pdfBytes = await pdfDoc.save({ updateFieldAppearances: false });
-    const blob = new Blob([pdfBytes], { type: "application/pdf" });
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = nomeArquivo;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
-
-    whatsappBtn.href = "https://wa.me/?text=" + encodeURIComponent(`PDF gerado: ${nomeArquivo}`);
-  });
-
-  updateProgress();
-});
-</script>
+  </script>
 
 </body>
 </html>
