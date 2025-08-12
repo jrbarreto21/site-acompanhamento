@@ -89,8 +89,9 @@ document.getElementById("formulario").addEventListener("submit", async function 
   URL.revokeObjectURL(url);
 
   // Atualiza link WhatsApp (nota: blob URL não é útil para compartilhar fora do dispositivo; aqui só notificamos o nome)
-  document.getElementById("whatsapp-share").href =
-    "https://wa.me/?text=" + encodeURIComponent("PDF gerado: " + nomeArquivo + " (baixado localmente).");
+ // document.getElementById("whatsapp-share").href =
+  //  "https://wa.me/?text=" + encodeURIComponent("PDF gerado: " + nomeArquivo + " (baixado localmente).");
 
   console.log("PDF gerado:", nomeArquivo);
 });
+
