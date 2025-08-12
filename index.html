@@ -258,18 +258,7 @@
         </svg>
         Novo Formulário
       </button>
-
-      <!-- Botão Gerar PDF (placeholder - sua lógica pode conectar aqui) -->
-      <button id="btnGeneratePdf" class="btn" title="Gerar PDF (implemente a lógica de PDF)">
-        <!-- Ícone de download -->
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 3v12" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M8 11l4 4 4-4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M21 21H3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Gerar PDF
-      </button>
-    </div>
+	 </div>
   </header>
 
   <!-- ========== CONTAINER PRINCIPAL ========== -->
@@ -1718,30 +1707,26 @@
         <!-- ========== AÇÕES FINAIS ========== -->
         <div class="actions" role="region" aria-label="Ações do formulário">
           <!-- Botão gerar PDF duplicado (pq header tem também) -->
-          <button type="submit" class="btn" title="Gerar PDF">
+          <button type="submit" id="btnGeneratePdf2" class="btn" title="Gerar PDF">
+		  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 3v12" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 11l4 4 4-4" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 21H3" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
             Gerar PDF
-          </button/
+          </button>
 
           <!-- Botão limpar formulário (reset) - também disponível no header -->
           <button type="reset" id="btnReset" class="btn ghost" title="Limpar formulário">
             Limpar Formulário
           </button>
 
-          <!-- Compartilhar via WhatsApp: link atualizado dinamicamente -->
-          <a href="#" id="whatsapp-share" class="whatsapp" target="_blank" rel="noopener" title="Compartilhar resumo no WhatsApp">
-            <!-- Ícone WhatsApp (SVG inline - evita dependências externas) -->
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M21.1 2.9A11.8 11.8 0 0012 0C5.4 0 .3 5.1.3 11.7c0 2 .5 3.9 1.4 5.6L0 24l6.9-1.8c1.6.9 3.4 1.4 5.2 1.4 6.6 0 11.7-5.1 11.7-11.7 0-3.1-1.2-6-3.7-8.5z" fill="#fff"/>
-            </svg>
-            Compartilhar
-          </a>
+         
         </div>
 	
 	
 	
-	<div class="actions">
-      <button type="submit">Gerar PDF</button>
-      </div>
+	
 
 
 
@@ -1801,7 +1786,7 @@
       const firstBtn = document.querySelector('.accordion[data-panel="secao1"]');
       if(firstBtn) firstBtn.click();
 
-      // WHATSAPP: monta a mensagem com os campos principais
+     /* // WHATSAPP: monta a mensagem com os campos principais
       const whatsappLink = document.getElementById('whatsapp-share');
       const crecheInput = document.getElementById('creche');
       const turmaInput = document.getElementById('turma');
@@ -1820,7 +1805,7 @@
         el.addEventListener('input', updateWhatsapp);
       });
       updateWhatsapp();
-
+*/
       // BOTÃO RESET no header: faz reset completo e rola para top com destaque
       const btnResetTop = document.getElementById('btnResetTop');
       const form = document.getElementById('formulario');
@@ -1833,7 +1818,7 @@
 
       btnResetTop.addEventListener('click', function(){
         form.reset();
-        updateWhatsapp();
+       // updateWhatsapp();
         window.scrollTo({top:0, behavior:'smooth'});
         highlightHeader();
         // fecha painéis abertos
@@ -1867,8 +1852,8 @@
 		
       }
 
-      btnGeneratePdf.addEventListener('click', gerarPdfPlaceholder);
-      btnGeneratePdf2.addEventListener('click', gerarPdfPlaceholder);
+     // btnGeneratePdf.addEventListener('click', gerarPdfPlaceholder);
+     // btnGeneratePdf2.addEventListener('click', gerarPdfPlaceholder);
 
       // Acessibilidade: permitir abrir/fechar com Enter/Space
       accButtons.forEach(btn => {
