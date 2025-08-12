@@ -94,4 +94,3 @@ document.getElementById("formulario").addEventListener("submit", async function 
 
   console.log("PDF gerado:", nomeArquivo);
 });
-
