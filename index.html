@@ -1754,125 +1754,167 @@
      * - Fornece hooks para o botão Gerar PDF (atualmente placeholder)
      */
 
-    document.addEventListener('DOMContentLoaded', function(){
-      // ACCORDION: encontra todos os botões tipo accordion e liga o clique
-      const accButtons = document.querySelectorAll('.accordion');
-      accButtons.forEach(btn => {
-        btn.addEventListener('click', function(){
-          const panelId = this.getAttribute('data-panel');
-          const panel = document.getElementById(panelId);
-          const isOpen = panel.classList.contains('open');
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("formulario");
+  const whatsappBtn = document.getElementById("whatsapp-share");
+  const accordions = document.querySelectorAll(".accordion");
+  const progressBar = document.createElement("div");
 
-          // fecha todos
-          document.querySelectorAll('.panel').forEach(p => {
-            p.classList.remove('open');
-            p.style.maxHeight = null;
-            p.setAttribute('aria-hidden','true');
-          });
-          document.querySelectorAll('.acc-arrow').forEach(a => a.style.transform = 'rotate(0deg)');
+  // ===== CRIAÇÃO DA BARRA DE PROGRESSO =====
+  progressBar.id = "progress-bar";
+  progressBar.style.height = "6px";
+  progressBar.style.background = "#4CAF50";
+  progressBar.style.width = "0%";
+  progressBar.style.transition = "width 0.3s ease";
+  document.body.insertBefore(progressBar, document.body.firstChild);
 
-          if(!isOpen){
-            // abre o selecionado
-            panel.classList.add('open');
-            panel.setAttribute('aria-hidden','false');
-            panel.style.maxHeight = panel.scrollHeight + 'px';
-            // gira a seta do botão clicado
-            const arrow = this.querySelector('.acc-arrow');
-            if(arrow) arrow.style.transform = 'rotate(180deg)';
-          } else {
-            panel.classList.remove('open');
-            panel.setAttribute('aria-hidden','true');
-            panel.style.maxHeight = null;
-            const arrow = this.querySelector('.acc-arrow');
-            if(arrow) arrow.style.transform = 'rotate(0deg)';
-          }
-        });
-      });
-
-      // Inicialmente abre a primeira seção para orientação
-      const firstBtn = document.querySelector('.accordion[data-panel="secao1"]');
-      if(firstBtn) firstBtn.click();
-
-      // WHATSAPP: monta a mensagem com os campos principais
-      const whatsappLink = document.getElementById('whatsapp-share');
-      const crecheInput = document.getElementById('creche');
-      const turmaInput = document.getElementById('turma');
-      const turnoInput = document.getElementById('turno');
-
-      function updateWhatsapp(){
-        const creche = crecheInput.value.trim() || '[Nome da Creche]';
-        const turma = turmaInput.value.trim() || '[Turma]';
-        const turno = turnoInput.value.trim() || '[Turno]';
-        const text = encodeURIComponent(`Acompanhamento Pedagógico\\nCreche: ${creche}\\nTurma: ${turma}\\nTurno: ${turno}\\n(Resumo gerado pelo sistema)`);
-        whatsappLink.href = `https://api.whatsapp.com/send?text=${text}`;
+  // ===== ATUALIZA A BARRA DE PROGRESSO =====
+  function updateProgress() {
+    const inputs = form.querySelectorAll("input, select, textarea");
+    const total = inputs.length;
+    let filled = 0;
+    inputs.forEach(input => {
+      if (input.type === "checkbox" || input.type === "radio") {
+        if (input.checked) filled++;
+      } else if (input.value.trim() !== "") {
+        filled++;
       }
-
-      // atualiza ao digitar
-      [crecheInput, turmaInput, turnoInput].forEach(el => {
-        el.addEventListener('input', updateWhatsapp);
-      });
-      updateWhatsapp();
-
-      // BOTÃO RESET no header: faz reset completo e rola para top com destaque
-      const btnResetTop = document.getElementById('btnResetTop');
-      const form = document.getElementById('formulario');
-      const appHeader = document.getElementById('appHeader');
-
-      function highlightHeader(){
-        appHeader.classList.add('highlight');
-        setTimeout(()=> appHeader.classList.remove('highlight'), 900);
-      }
-
-      btnResetTop.addEventListener('click', function(){
-        form.reset();
-        updateWhatsapp();
-        window.scrollTo({top:0, behavior:'smooth'});
-        highlightHeader();
-        // fecha painéis abertos
-        document.querySelectorAll('.panel').forEach(p => {
-          p.classList.remove('open');
-          p.style.maxHeight = null;
-          p.setAttribute('aria-hidden','true');
-        });
-      });
-
-      // Botão Reset dentro do formulário (mantido para acessibilidade)
-      const btnReset = document.getElementById('btnReset');
-      btnReset.addEventListener('click', function(){
-        // delay leve para garantir que o form reset aconteça
-        setTimeout(()=> {
-          updateWhatsapp();
-          window.scrollTo({top:0, behavior:'smooth'});
-          highlightHeader();
-        }, 50);
-      });
-
-      // Botões Gerar PDF - hook para sua lógica de geração (placeholder)
-      const btnGeneratePdf = document.getElementById('btnGeneratePdf');
-      const btnGeneratePdf2 = document.getElementById('btnGeneratePdf2');
-
-      function gerarPdfPlaceholder(){
-        // Comentário: aqui você pode chamar sua rotina que usa pdf-lib (ou outra)
-        // para preencher um template PDF, usando os valores do formulário.
-        // Exemplo: coletar todos os campos e enviar para o servidor ou processar localmente.
-        alert('Botão Gerar PDF clicado. Aqui implemente a lógica de geração do PDF usando pdf-lib ou outra solução.');
-      }
-
-      btnGeneratePdf.addEventListener('click', gerarPdfPlaceholder);
-      btnGeneratePdf2.addEventListener('click', gerarPdfPlaceholder);
-
-      // Acessibilidade: permitir abrir/fechar com Enter/Space
-      accButtons.forEach(btn => {
-        btn.setAttribute('tabindex','0');
-        btn.addEventListener('keydown', function(e){
-          if(e.key === 'Enter' || e.key === ' '){
-            e.preventDefault();
-            this.click();
-          }
-        });
-      });
-
     });
+    const percent = Math.round((filled / total) * 100);
+    progressBar.style.width = percent + "%";
+  }
+
+  // ===== FEEDBACK VISUAL NOS CAMPOS =====
+  form.querySelectorAll("input, select, textarea").forEach(field => {
+    field.addEventListener("input", function () {
+      if (this.required && this.value.trim() === "") {
+        this.style.border = "2px solid red";
+      } else if (this.value.trim() !== "") {
+        this.style.border = "2px solid green";
+      } else {
+        this.style.border = "1px solid #ccc";
+      }
+      updateProgress();
+    });
+  });
+
+  // ===== ACCORDION INTELIGENTE =====
+  accordions.forEach((acc, index) => {
+    acc.addEventListener("click", function () {
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        document.querySelectorAll(".panel").forEach(p => p.style.display = "none");
+        panel.style.display = "block";
+        panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+    if (index === 0) {
+      acc.classList.add("active");
+      acc.nextElementSibling.style.display = "block";
+    }
+  });
+
+  // ===== BOTÃO "NOVO FORMULÁRIO" =====
+  document.getElementById("novo-form").addEventListener("click", function () {
+    form.reset();
+    form.querySelectorAll("input, select, textarea").forEach(f => f.style.border = "1px solid #ccc");
+    progressBar.style.width = "0%";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.querySelector("header").classList.add("highlight");
+    setTimeout(() => document.querySelector("header").classList.remove("highlight"), 1000);
+  });
+
+  // ===== LÓGICA PARA PREENCHER O PDF =====
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => data[key] = value);
+
+    // Carregar PDF base
+    const existingPdfBytes = await fetch("Acompanhamentobase.pdf").then(res => res.arrayBuffer());
+    const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes, { updateMetadata: false });
+    const pdfForm = pdfDoc.getForm();
+
+    // Função para preencher qualquer tipo de campo
+    function trySetField(fieldName, value) {
+      try {
+        if (pdfForm.getTextField(fieldName)) {
+          pdfForm.getTextField(fieldName).setText(String(value || ""));
+          return;
+        }
+      } catch {}
+      try {
+        if (pdfForm.getCheckBox(fieldName)) {
+          if (["on", "true", "1", "sim"].includes(String(value).toLowerCase())) {
+            pdfForm.getCheckBox(fieldName).check();
+          } else {
+            pdfForm.getCheckBox(fieldName).uncheck();
+          }
+          return;
+        }
+      } catch {}
+      try {
+        if (pdfForm.getRadioGroup(fieldName)) {
+          pdfForm.getRadioGroup(fieldName).select(String(value));
+          return;
+        }
+      } catch {}
+      try {
+        if (pdfForm.getDropdown(fieldName)) {
+          pdfForm.getDropdown(fieldName).select(String(value));
+          return;
+        }
+      } catch {}
+      console.warn(`Campo não encontrado no PDF: ${fieldName}`);
+    }
+
+    // Preencher campos
+    Object.keys(data).forEach(key => {
+      trySetField(key, data[key]);
+    });
+
+    // Atualizar aparência dos campos no PDF
+    const helv = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    pdfForm.updateFieldAppearances(helv);
+
+    // Nome do arquivo
+    function sanitize(str) {
+      return String(str || "")
+        .normalize("NFKD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-zA-Z0-9 _-]/g, "")
+        .trim()
+        .replace(/\s+/g, "_") || "SemValor";
+    }
+
+    const nomeArquivo = `Acompanhamento_${sanitize(data.creche)}_${sanitize(data.turma)}_${sanitize(data.turno)}.pdf`;
+
+    // Salvar PDF mantendo editável
+    const pdfBytes = await pdfDoc.save({ updateFieldAppearances: false });
+    const blob = new Blob([pdfBytes], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+
+    // Download automático
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = nomeArquivo;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+
+    // Atualizar botão WhatsApp
+    whatsappBtn.href = "https://wa.me/?text=" + encodeURIComponent(`PDF gerado: ${nomeArquivo}`);
+  });
+
+  // Iniciar progresso
+  updateProgress();
+});
   </script>
 
 </body>
