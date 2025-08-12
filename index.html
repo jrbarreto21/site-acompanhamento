@@ -1,1443 +1,1671 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acompanhamento Pedagógico - Sistema Educacional</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Acompanhamento Pedagógico 2025</title>
+
+  <!-- Biblioteca PDF-LIB -->
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header.highlight {
+      box-shadow: 0 0 15px yellow;
+      transition: box-shadow 0.5s ease;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .accordion {
+      background-color: #eee;
+      color: #444;
+      cursor: pointer;
+      padding: 15px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+    .accordion.active, .accordion:hover {
+      background-color: #ccc;
+    }
+    .panel {
+      padding: 0 15px;
+      display: none;
+      overflow: hidden;
+      background: #f9f9f9;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    a.btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    a.btn:hover {
+      background: #1ebe5d;
+    }
+    #progress-bar {
+      height: 6px;
+      background: #4CAF50;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+  </style>
 </head>
 <body>
-    <!-- Notificação Toast -->
-    <div id="toast" class="toast">
-        <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 12l2 2 4-4"></path>
-            <circle cx="12" cy="12" r="10"></circle>
-        </svg>
-        <span class="toast-text">Rascunho salvo automaticamente</span>
+
+<header>
+  <h1>Acompanhamento Pedagógico 2025</h1>
+</header>
+
+<div id="progress-bar"></div>
+
+<div class="container">
+  <form id="formulario">
+
+    <!-- DADOS INICIAIS -->
+    <button type="button" class="accordion">Dados Iniciais</button>
+    <div class="panel">
+      <label>Creche</label>
+      <input type="text" name="creche" required>
+
+      <label>Turma</label>
+      <input type="text" name="turma" required>
+
+      <label>Turno</label>
+      <input type="text" name="turno" required>
     </div>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="header-title">
-                <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                </svg>
-                <div>
-                    <h1>Acompanhamento Pedagógico</h1>
-                    <p>Sistema de Avaliação Educacional</p>
-                </div>
+    <!-- ===========================================================
+             SEÇÃO I - APROPRIAÇÃO DO CURRÍCULO
+             Comentário: seção para avaliar conhecimentos e percepções sobre
+             objetivos da Educação Infantil e BNCC.
+             ============================================================ -->
+        <button type="button" class="accordion accent-1" data-panel="secao1" aria-expanded="false" id="secao1Btn">
+          <div class="left">
+            <span class="acc-icon" aria-hidden="true">1</span>
+            <div>
+              <span class="acc-title">SEÇÃO I - APROPRIAÇÃO DO CURRÍCULO</span>
+              <span class="acc-sub">Compreensão sobre currículo, BNCC e alfabetização.</span>
             </div>
+          </div>
+          <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div id="secao1" class="panel" aria-hidden="true">
+          <!-- Perguntas da Seção I (mantive as opções originais) -->
+          <div class="form-row">
+            <label class="field">1. Há compreensão sobre os impactos negativos das interações inadequadas para as crianças?</label>
+            <select name="SEC_I_1">
+              <option value="">Selecione</option>
+              <option value="1">[1] Não conhece e não tem senso crítico formado sobre o objetivo da Educação Infantil; não expressa opinião sobre o tema.</option>
+              <option value="2">[2] Sim, conhece e/ou reconhece, porém não partilha dessa visão; discorda do currículo da rede e do Brasil.</option>
+              <option value="3">[3] Em processo, conhece superficialmente, mas tem desejo de conhecer mais e partilhar da mesma visão da rede.</option>
+              <option value="4">[4] Sim, conhece e/ou reconhece, e partilha dessa visão.</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">2. Há clareza sobre os objetivos da Educação Infantil?</label>
+            <select name="SEC_I_2">
+              <option value="">Selecione</option>
+              <option value="1">[1] Não conhece e não tem senso crítico formado sobre o objetivo da Educação Infantil; não expressa opinião sobre o tema.</option>
+              <option value="2">[2] Sim, conhece e/ou reconhece, porém não partilha dessa visão; discorda do currículo da rede e do Brasil.</option>
+              <option value="3">[3] Em processo, conhece superficialmente, mas tem desejo de conhecer mais e partilhar da mesma visão da rede.</option>
+              <option value="4">[4] Sim, conhece e/ou reconhece, e partilha dessa visão.</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">3. Compreende que o papel na Educação Infantil vai além do cuidar?</label>
+            <select name="SEC_I_3">
+              <option value="">Selecione</option>
+              <option value="1">[1] Não conhece e não tem senso crítico formado sobre o objetivo da Educação Infantil; não expressa opinião sobre o tema.</option>
+              <option value="2">[2] Sim, conhece e/ou reconhece, porém não partilha dessa visão; discorda do currículo da rede e do Brasil.</option>
+              <option value="3">[3] Em processo, conhece superficialmente, mas tem desejo de conhecer mais e partilhar da mesma visão da rede.</option>
+              <option value="4">[4] Sim, conhece e/ou reconhece, e partilha dessa visão.</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">4. Reconhece a importância de trabalhar as competências gerais presentes na BNCC?</label>
+            <select name="SEC_I_4">
+              <option value="">Selecione</option>
+              <option value="1">[1] Não conhece e não tem senso crítico formado sobre o objetivo da Educação Infantil; não expressa opinião sobre o tema.</option>
+              <option value="2">[2] Sim, conhece e/ou reconhece, porém não partilha dessa visão; discorda do currículo da rede e do Brasil.</option>
+              <option value="3">[3] Em processo, conhece superficialmente, mas tem desejo de conhecer mais e partilhar da mesma visão da rede.</option>
+              <option value="4">[4] Sim, conhece e/ou reconhece, e partilha dessa visão.</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">5. Reconhece a importância da alfabetização na Educação Infantil? Qual o papel da Educação Infantil nesse processo?</label>
+            <select name="SEC_I_5">
+              <option value="">Selecione</option>
+              <option value="1">[1] Não conhece e não tem senso crítico formado sobre o objetivo da Educação Infantil; não expressa opinião sobre o tema.</option>
+              <option value="2">[2] Sim, conhece e/ou reconhece, porém não partilha dessa visão; discorda do currículo da rede e do Brasil.</option>
+              <option value="3">[3] Em processo, conhece superficialmente, mas tem desejo de conhecer mais e partilhar da mesma visão da rede.</option>
+              <option value="4">[4] Sim, conhece e/ou reconhece, e partilha dessa visão.</option>
+            </select>
+          </div>
         </div>
-    </header>
 
-    <div class="container">
-        <!-- Barra de Progresso -->
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+        <!-- ===========================================================
+             SEÇÃO II - PLANEJAMENTO PEDAGÓGICO
+             Comentário: avaliação do planejamento, materiais, intenção pedagógica.
+             ============================================================ -->
+        <button type="button" class="accordion accent-2" data-panel="secao2" aria-expanded="false" id="secao2Btn">
+          <div class="left">
+            <span class="acc-icon" aria-hidden="true">2</span>
+            <div>
+              <span class="acc-title">SEÇÃO II – PLANEJAMENTO PEDAGÓGICO</span>
+              <span class="acc-sub">Planejamento, materiais, objetivos e intencionalidade.</span>
             </div>
-            <div class="progress-text" id="progressText">0% concluído (0/150 campos)</div>
+          </div>
+          <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div id="secao2" class="panel" aria-hidden="true">
+          <div class="form-row">
+            <label class="field"><b>Respostas: Sim / Não / Observações</b></label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">O planejamento parte da escuta e diagnóstico do desenvolvimento e aprendizagens das crianças?</label>
+            <input type="text" name="SEC_II_1">
+          </div>
+
+          <div class="form-row">
+            <label class="field">As estratégias estão alinhadas à faixa etária e às necessidades das crianças?</label>
+            <input type="text" name="SEC_II_2">
+          </div>
+
+          <div class="form-row">
+            <label class="field">O tempo é organizado de forma eficaz conforme as propostas?</label>
+            <input type="text" name="SEC_II_3">
+          </div>
+
+          <div class="form-row">
+            <label class="field">A seleção de materiais está alinhada aos objetivos de aprendizagem?</label>
+            <input type="text" name="SEC_II_4">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Há uso variado de agrupamentos de crianças (pequeno/grande grupo) e espaços educativos?</label>
+            <input type="text" name="SEC_II_5">
+          </div>
+
+          <div class="form-row">
+            <label class="field">O planejamento está fundamentado na BNCC, no Currículo da Rede (Patos) e no PP?</label>
+            <input type="text" name="SEC_II_6">
+          </div>
+
+          <div class="form-row">
+            <label class="field">O professor adapta as temáticas e propostas didáticas recebidas às necessidades reais do grupo?</label>
+            <input type="text" name="SEC_II_7">
+          </div>
+
+          <div class="form-row">
+            <label class="field">O planejamento contempla a organização dos tempos, espaços e materiais diversos?</label>
+            <input type="text" name="SEC_II_8">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Valoriza as vozes e interesses das crianças para orientar as práticas?</label>
+            <input type="text" name="SEC_II_9">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Os brinquedos e jogos são adequados à faixa etária e ao desenvolvimento infantil?</label>
+            <input type="text" name="SEC_II_10">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Trabalha os campos de experiência de forma integrada e não fragmentada?</label>
+            <input type="text" name="SEC_II_11">
+          </div>
+
+          <div class="form-row">
+            <label class="field">O planejamento contempla a participação das famílias nas ações promovidas na Unidade Escolar?</label>
+            <input type="text" name="SEC_II_12">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Utiliza verbos concretos e compatíveis com a etapa do desenvolvimento infantil (ex: explorar, observar, nomear, criar)?</label>
+            <input type="text" name="SEC_II_13_1">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Os verbos permitem observar ações concretas das crianças?</label>
+            <input type="text" name="SEC_II_13_2">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Objetivos são claros, diretos e observáveis?</label>
+            <input type="text" name="SEC_II_14_1">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Há alinhamento entre os objetivos escritos pela professora com os objetivos dos campos de experiência da BNCC?</label>
+            <input type="text" name="SEC_II_14_2">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Está explícito como as crianças irão aprender (estratégias e mediações)?</label>
+            <input type="text" name="SEC_II_14_3">
+          </div>
+
+          <div class="form-row">
+            <label class="field">O planejamento indica como avaliar se houve aprendizagem (critérios compatíveis)?</label>
+            <input type="text" name="SEC_II_14_4">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Há coerência entre objetivos, estratégias, materiais, espaço e tempo?</label>
+            <input type="text" name="SEC_II_15_1">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Planeja com foco no protagonismo das crianças e ampliação de repertórios?</label>
+            <input type="text" name="SEC_II_15_2">
+          </div>
         </div>
 
-        <form id="formulario">
-            <!-- Informações Básicas -->
-            <div class="section-card">
-                <div class="section-header">
-                    <h2>Informações Básicas</h2>
-                    <p>Dados gerais da avaliação</p>
-                </div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="creche">Nome da Creche</label>
-                        <input type="text" id="creche" name="creche" placeholder="Digite o nome da creche" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="turma">Turma</label>
-                        <input type="text" id="turma" name="turma" placeholder="Ex: Maternal I" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="turno">Turno</label>
-                        <select id="turno" name="turno" required>
-                            <option value="">Selecione o turno</option>
-                            <option value="Matutino">Matutino</option>
-                            <option value="Vespertino">Vespertino</option>
-                            <option value="Integral">Integral</option>
-                        </select>
-                    </div>
-                </div>
+        <!-- ===========================================================
+             SEÇÃO III - MEDIAÇÃO DOCENTE
+             Comentário: extensa seção com múltiplos campos para observação.
+             Mantive a estrutura original com identificação de professora/turma/datas.
+             ============================================================ -->
+        <button type="button" class="accordion accent-3" data-panel="secao3" aria-expanded="false" id="secao3Btn">
+          <div class="left">
+            <span class="acc-icon" aria-hidden="true">3</span>
+            <div>
+              <span class="acc-title">SEÇÃO III - MEDIAÇÃO DOCENTE</span>
+              <span class="acc-sub">Observação de estratégias, gestão do grupo, materiais e mediações.</span>
             </div>
-
-            <!-- SEÇÃO I -->
-            <div class="accordion-item">
-                <button type="button" class="accordion-header active" data-section="section1">
-                    <span class="accordion-number">I</span>
-                    <span class="accordion-title">Apropriação do Currículo</span>
-                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6,9 12,15 18,9"></polyline>
-                    </svg>
-                </button>
-                <div class="accordion-content active" id="section1">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="SEC_I_1">1. Há compreensão sobre os impactos negativos das interações inadequadas para as crianças?</label>
-                            <select id="SEC_I_1" name="SEC_I_1">
-                                <option value="">Selecione uma opção</option>
-                                <option value="1">[1] Não conhece e não tem senso crítico formado sobre o objetivo da Educação Infantil; não expressa opinião sobre o tema.</option>
-                                <option value="2">[2] Sim, conhece e/ou reconhece, porém não partilha dessa visão; discorda do currículo da rede e do Brasil.</option>
-                                <option value="3">[3] Em processo, conhece superficialmente, mas tem desejo de conhecer mais e partilhar da mesma visão da rede.</option>
-                                <option value="4">[4] Sim, conhece e/ou reconhece, e partilha dessa visão.</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_I_2">2. Há clareza sobre os objetivos da Educação Infantil?</label>
-                            <select id="SEC_I_2" name="SEC_I_2">
-                                <option value="">Selecione uma opção</option>
-                                <option value="1">[1] Não conhece e não tem senso crítico formado sobre o objetivo da Educação Infantil; não expressa opinião sobre o tema.</option>
-                                <option value="2">[2] Sim, conhece e/ou reconhece, porém não partilha dessa visão; discorda do currículo da rede e do Brasil.</option>
-                                <option value="3">[3] Em processo, conhece superficialmente, mas tem desejo de conhecer mais e partilhar da mesma visão da rede.</option>
-                                <option value="4">[4] Sim, conhece e/ou reconhece, e partilha dessa visão.</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_I_3">3. Compreende que o papel na Educação Infantil vai além do cuidar?</label>
-                            <select id="SEC_I_3" name="SEC_I_3">
-                                <option value="">Selecione uma opção</option>
-                                <option value="1">[1] Não conhece e não tem senso crítico formado sobre o objetivo da Educação Infantil; não expressa opinião sobre o tema.</option>
-                                <option value="2">[2] Sim, conhece e/ou reconhece, porém não partilha dessa visão; discorda do currículo da rede e do Brasil.</option>
-                                <option value="3">[3] Em processo, conhece superficialmente, mas tem desejo de conhecer mais e partilhar da mesma visão da rede.</option>
-                                <option value="4">[4] Sim, conhece e/ou reconhece, e partilha dessa visão.</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_I_4">4. Reconhece a importância de trabalhar as competências gerais presentes na BNCC?</label>
-                            <select id="SEC_I_4" name="SEC_I_4">
-                                <option value="">Selecione uma opção</option>
-                                <option value="1">[1] Não conhece e não tem senso crítico formado sobre o objetivo da Educação Infantil; não expressa opinião sobre o tema.</option>
-                                <option value="2">[2] Sim, conhece e/ou reconhece, porém não partilha dessa visão; discorda do currículo da rede e do Brasil.</option>
-                                <option value="3">[3] Em processo, conhece superficialmente, mas tem desejo de conhecer mais e partilhar da mesma visão da rede.</option>
-                                <option value="4">[4] Sim, conhece e/ou reconhece, e partilha dessa visão.</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_I_5">5. Reconhece a importância da alfabetização na Educação Infantil? Qual o papel da Educação Infantil nesse processo?</label>
-                            <select id="SEC_I_5" name="SEC_I_5">
-                                <option value="">Selecione uma opção</option>
-                                <option value="1">[1] Não conhece e não tem senso crítico formado sobre o objetivo da Educação Infantil; não expressa opinião sobre o tema.</option>
-                                <option value="2">[2] Sim, conhece e/ou reconhece, porém não partilha dessa visão; discorda do currículo da rede e do Brasil.</option>
-                                <option value="3">[3] Em processo, conhece superficialmente, mas tem desejo de conhecer mais e partilhar da mesma visão da rede.</option>
-                                <option value="4">[4] Sim, conhece e/ou reconhece, e partilha dessa visão.</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div id="secao3" class="panel" aria-hidden="true">
+          <!-- Identificação da observação -->
+          <div class="form-row form-grid-2">
+            <div>
+              <label class="field">Professora(s):</label>
+              <input type="text" name="SEC_III_PROFESSORA">
             </div>
-
-            <!-- SEÇÃO II -->
-            <div class="accordion-item">
-                <button type="button" class="accordion-header" data-section="section2">
-                    <span class="accordion-number">II</span>
-                    <span class="accordion-title">Planejamento Pedagógico</span>
-                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6,9 12,15 18,9"></polyline>
-                    </svg>
-                </button>
-                <div class="accordion-content" id="section2">
-                    <div class="section-note">
-                        <strong>Respostas: Sim / Não / Observações</strong>
-                    </div>
-                    
-                    <div class="subsection">
-                        <h4>Planejamento feito com base no diagnóstico e escuta das crianças</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_1">O planejamento parte da escuta e diagnóstico do desenvolvimento e aprendizagens das crianças?</label>
-                            <input type="text" id="SEC_II_1" name="SEC_II_1" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Adequação Pedagógica</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_2">As estratégias estão alinhadas à faixa etária e às necessidades das crianças?</label>
-                            <input type="text" id="SEC_II_2" name="SEC_II_2" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Gestão do Tempo</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_3">O tempo é organizado de forma eficaz conforme as propostas?</label>
-                            <input type="text" id="SEC_II_3" name="SEC_II_3" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Materiais</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_4">A seleção de materiais está alinhada aos objetivos de aprendizagem?</label>
-                            <input type="text" id="SEC_II_4" name="SEC_II_4" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Diversidade de Espaços e Agrupamentos</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_5">Há uso variado de agrupamentos de crianças (pequeno/grande grupo) e espaços educativos?</label>
-                            <input type="text" id="SEC_II_5" name="SEC_II_5" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Alinhamento Curricular</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_6">O planejamento está fundamentado na BNCC, no Currículo da Rede (Patos) e no PP?</label>
-                            <input type="text" id="SEC_II_6" name="SEC_II_6" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Adaptação de Propostas da SME/LEPES</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_7">O professor adapta as temáticas e propostas didáticas recebidas às necessidades reais do grupo?</label>
-                            <input type="text" id="SEC_II_7" name="SEC_II_7" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Organização do Espaço/Tempo e Recursos</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_8">O planejamento contempla a organização dos tempos, espaços e materiais diversos?</label>
-                            <input type="text" id="SEC_II_8" name="SEC_II_8" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Voz e Interesse da Criança</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_9">Valoriza as vozes e interesses das crianças para orientar as práticas?</label>
-                            <input type="text" id="SEC_II_9" name="SEC_II_9" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Materiais e Jogos</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_10">Os brinquedos e jogos são adequados à faixa etária e ao desenvolvimento infantil?</label>
-                            <input type="text" id="SEC_II_10" name="SEC_II_10" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Campos de Experiência</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_11">Trabalha os campos de experiência de forma integrada e não fragmentada?</label>
-                            <input type="text" id="SEC_II_11" name="SEC_II_11" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Participação das Famílias</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_12">O planejamento contempla a participação das famílias nas ações promovidas na Unidade Escolar?</label>
-                            <input type="text" id="SEC_II_12" name="SEC_II_12" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Uso de Verbos Adequados ao Desenvolvimento Infantil</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_13_1">Utiliza verbos concretos e compatíveis com a etapa do desenvolvimento infantil (ex: explorar, observar, nomear, criar)?</label>
-                            <input type="text" id="SEC_II_13_1" name="SEC_II_13_1" placeholder="Sim / Não / Observações">
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_II_13_2">Os verbos permitem observar ações concretas das crianças?</label>
-                            <input type="text" id="SEC_II_13_2" name="SEC_II_13_2" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Clareza e Especificidade dos Objetivos</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_14_1">Objetivos são claros, diretos e observáveis?</label>
-                            <input type="text" id="SEC_II_14_1" name="SEC_II_14_1" placeholder="Sim / Não / Observações">
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_II_14_2">Há alinhamento entre os objetivos escritos pela professora com os objetivos dos campos de experiência da BNCC?</label>
-                            <input type="text" id="SEC_II_14_2" name="SEC_II_14_2" placeholder="Sim / Não / Observações">
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_II_14_3">Está explícito como as crianças irão aprender (estratégias e mediações)?</label>
-                            <input type="text" id="SEC_II_14_3" name="SEC_II_14_3" placeholder="Sim / Não / Observações">
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_II_14_4">O planejamento indica como avaliar se houve aprendizagem (critérios compatíveis)?</label>
-                            <input type="text" id="SEC_II_14_4" name="SEC_II_14_4" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Intencionalidade Pedagógica</h4>
-                        <div class="form-group">
-                            <label for="SEC_II_15_1">Há coerência entre objetivos, estratégias, materiais, espaço e tempo?</label>
-                            <input type="text" id="SEC_II_15_1" name="SEC_II_15_1" placeholder="Sim / Não / Observações">
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_II_15_2">Planeja com foco no protagonismo das crianças e ampliação de repertórios?</label>
-                            <input type="text" id="SEC_II_15_2" name="SEC_II_15_2" placeholder="Sim / Não / Observações">
-                        </div>
-                    </div>
-                </div>
+            <div>
+              <label class="field">Turma:</label>
+              <input type="text" name="SEC_III_TURMA">
             </div>
-
-            <!-- SEÇÃO III -->
-            <div class="accordion-item">
-                <button type="button" class="accordion-header" data-section="section3">
-                    <span class="accordion-number">III</span>
-                    <span class="accordion-title">Mediação Docente</span>
-                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6,9 12,15 18,9"></polyline>
-                    </svg>
-                </button>
-                <div class="accordion-content" id="section3">
-                    <div class="subsection">
-                        <h4>Dados da Observação</h4>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="SEC_III_PROFESSORA">Professora(s)</label>
-                                <input type="text" id="SEC_III_PROFESSORA" name="SEC_III_PROFESSORA">
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_TURMA">Turma</label>
-                                <input type="text" id="SEC_III_TURMA" name="SEC_III_TURMA">
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_DIA">Dia</label>
-                                <input type="text" id="SEC_III_DIA" name="SEC_III_DIA">
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_MES">Mês</label>
-                                <select id="SEC_III_MES" name="SEC_III_MES">
-                                    <option value="">Selecione</option>
-                                    <option value="Janeiro">Janeiro</option>
-                                    <option value="Fevereiro">Fevereiro</option>
-                                    <option value="Março">Março</option>
-                                    <option value="Abril">Abril</option>
-                                    <option value="Maio">Maio</option>
-                                    <option value="Junho">Junho</option>
-                                    <option value="Julho">Julho</option>
-                                    <option value="Agosto">Agosto</option>
-                                    <option value="Setembro">Setembro</option>
-                                    <option value="Outubro">Outubro</option>
-                                    <option value="Novembro">Novembro</option>
-                                    <option value="Dezembro">Dezembro</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_ANO">Ano</label>
-                                <input type="text" id="SEC_III_ANO" name="SEC_III_ANO" value="2025">
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_OBSERVADOR">Observador(a)</label>
-                                <input type="text" id="SEC_III_OBSERVADOR" name="SEC_III_OBSERVADOR">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>1. Estratégias Didáticas</h4>
-                        
-                        <div class="sub-subsection">
-                            <h5>1.1 Ampliação de Repertório</h5>
-                            <div class="form-group">
-                                <label for="SEC_III_1_1_1">Realiza leitura ou contação de histórias</label>
-                                <select id="SEC_III_1_1_1" name="SEC_III_1_1_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_1_1_2">Faz uso de perguntas abertas para instigar o pensamento, o diálogo, a organização da fala por parte das crianças</label>
-                                <select id="SEC_III_1_1_2" name="SEC_III_1_1_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_1_1_3">Utiliza materiais adequados ao tema e/ou à faixa etária</label>
-                                <select id="SEC_III_1_1_3" name="SEC_III_1_1_3">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_1_1_4">Estimula a curiosidade e a formulação de hipóteses</label>
-                                <select id="SEC_III_1_1_4" name="SEC_III_1_1_4">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="sub-subsection">
-                            <h5>1.2 Conexão com a Realidade</h5>
-                            <div class="form-group">
-                                <label for="SEC_III_1_2_1">Utiliza abordagem lúdica (brincadeiras, jogos, cantigas) promovendo aprendizagens</label>
-                                <select id="SEC_III_1_2_1" name="SEC_III_1_2_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_1_2_2">Busca envolver todas ou a maior parte das crianças, citando nomes, chamando para participar, incluindo-as nas decisões</label>
-                                <select id="SEC_III_1_2_2" name="SEC_III_1_2_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_1_2_3">Apresenta conteúdos novos conectando com o cotidiano/realidade de vida das crianças fora da Unidade Escolar</label>
-                                <select id="SEC_III_1_2_3" name="SEC_III_1_2_3">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="sub-subsection">
-                            <h5>1.3 Brincadeira</h5>
-                            <div class="form-group">
-                                <label for="SEC_III_1_3_1">Brincadeira livre: organiza previamente materiais, tempos e espaços destinados a essa vivência</label>
-                                <select id="SEC_III_1_3_1" name="SEC_III_1_3_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_1_3_2">Brincadeira livre: observa e acompanha as escolhas das crianças, intervindo com mediações sutis para ampliar a aprendizagem</label>
-                                <select id="SEC_III_1_3_2" name="SEC_III_1_3_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_1_3_3">Brincadeira dirigida e jogos: professor organiza as brincadeiras mediando as ações com clareza permitindo a interação entre as crianças favorecendo o alcance dos objetivos propostos</label>
-                                <select id="SEC_III_1_3_3" name="SEC_III_1_3_3">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_1_3_4">Observação: professor observa as interações sem interferir (exceto quando necessário), para constatar o desenvolvimento durante as vivências, fazendo registros e escuta ativa</label>
-                                <select id="SEC_III_1_3_4" name="SEC_III_1_3_4">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="sub-subsection">
-                            <h5>1.4 Tipos de Práticas Pedagógicas</h5>
-                            <div class="form-group">
-                                <label for="SEC_III_1_4_1">Práticas que promovem expressão e comunicação (práticas relacionadas à oralidade, leitura, registros gráficos - desenhos, garatujas, letras, palavras, nome, textos coletivos, etc.)</label>
-                                <select id="SEC_III_1_4_1" name="SEC_III_1_4_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_1_4_2">Práticas que promovem autonomia, autocuidado, autoconfiança</label>
-                                <select id="SEC_III_1_4_2" name="SEC_III_1_4_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_1_4_3">Práticas que promovem imaginação, investigação, transformações e criação (práticas relacionadas à contagem oral, relações de quantidade, levantamento de hipóteses, registros numéricos, etc.)</label>
-                                <select id="SEC_III_1_4_3" name="SEC_III_1_4_3">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_1_4_4">Práticas que promovem socialização: empatia, cooperação e autorregulação</label>
-                                <select id="SEC_III_1_4_4" name="SEC_III_1_4_4">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>2. Gestão do Grupo</h4>
-                        
-                        <div class="sub-subsection">
-                            <h5>2.1 Tempo e Rotina</h5>
-                            <div class="form-group">
-                                <label for="SEC_III_2_1_1">Estimula a interação entre as crianças durante as vivências propostas, a partir da organização dos espaços, materiais e tempo</label>
-                                <select id="SEC_III_2_1_1" name="SEC_III_2_1_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_1_2">A rotina diária do professor (impressa ou afixada) contempla a prática da leitura e/ou contação de história</label>
-                                <select id="SEC_III_2_1_2" name="SEC_III_2_1_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_1_3">O professor organiza o tempo de modo que não cansa as crianças</label>
-                                <select id="SEC_III_2_1_3" name="SEC_III_2_1_3">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_1_4">Alterna entre momentos coletivos e individuais com fluidez</label>
-                                <select id="SEC_III_2_1_4" name="SEC_III_2_1_4">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_1_5">Garante tempo de qualidade para interações entre crianças</label>
-                                <select id="SEC_III_2_1_5" name="SEC_III_2_1_5">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_1_6">Evita tempos de espera; propõe atividades paralelas durante atendimentos individuais</label>
-                                <select id="SEC_III_2_1_6" name="SEC_III_2_1_6">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_1_7">Durante a rotina, o ritmo das crianças é respeitado — evita acelerar, interromper ou conter</label>
-                                <select id="SEC_III_2_1_7" name="SEC_III_2_1_7">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_1_8">A área externa é utilizada pelo menos por 30 minutos</label>
-                                <select id="SEC_III_2_1_8" name="SEC_III_2_1_8">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_1_9">As crianças não são deixadas sozinhas por mais de 5 minutos</label>
-                                <select id="SEC_III_2_1_9" name="SEC_III_2_1_9">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="sub-subsection">
-                            <h5>2.2 Espaço</h5>
-                            <div class="form-group">
-                                <label for="SEC_III_2_2_1">Organizar agrupamentos variados (duplas, trios, grandes grupos)</label>
-                                <select id="SEC_III_2_2_1" name="SEC_III_2_2_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_2_2">Propõe atividades na área externa com organização e segurança para exploração ativa e segura</label>
-                                <select id="SEC_III_2_2_2" name="SEC_III_2_2_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_2_3">Há exposto na sala de referência painéis de uso cotidiano para aprendizagens das crianças (Rotina, Calendário, Chamadinha, Palavras do Cotidiano, Alfabetos, Números)</label>
-                                <select id="SEC_III_2_2_3" name="SEC_III_2_2_3">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="sub-subsection">
-                            <h5>2.3 Materiais</h5>
-                            <div class="form-group">
-                                <label for="SEC_III_2_3_1">Permite acesso livre aos materiais para criação e brincadeira</label>
-                                <select id="SEC_III_2_3_1" name="SEC_III_2_3_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_3_2">Seleciona os materiais de acordo com a proposta e faixa etária — a maioria das crianças consegue usar com autonomia</label>
-                                <select id="SEC_III_2_3_2" name="SEC_III_2_3_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_3_3">Os materiais são alocados na altura das crianças com intenção de envolvê-las na construção das aprendizagens</label>
-                                <select id="SEC_III_2_3_3" name="SEC_III_2_3_3">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_3_4">Os cartazes/painéis estão alocados na parede na altura das crianças com intenção de retomar rotinas, registros e combinados feitos com elas</label>
-                                <select id="SEC_III_2_3_4" name="SEC_III_2_3_4">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_3_5">Os materiais são alocados na parede na altura das crianças com intenção de gerar pertencimento e acolhimento às crianças</label>
-                                <select id="SEC_III_2_3_5" name="SEC_III_2_3_5">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_3_6">Os materiais são utilizados com intenção pedagógica (riscadores, pinceis, tintas, materiais não estruturados, brinquedos, blocos lógicos, alfabetos e números móveis), de forma variada, e favorecem a criação por parte das crianças</label>
-                                <select id="SEC_III_2_3_6" name="SEC_III_2_3_6">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="sub-subsection">
-                            <h5>2.3.1 Uso do Material nas Produções Individuais das Crianças</h5>
-                            <p><strong>Objetivo:</strong> Identificar o equilíbrio (ou desequilíbrio) entre o tempo dedicado a diferentes tipos de material nas propostas de produção individual das crianças.</p>
-                            
-                            <div class="form-group">
-                                <label for="SEC_III_2_3_1_1">1. Uso exclusivo de folhas com propostas pré-prontas</label>
-                                <p class="field-description">O professor utiliza apenas xerox com atividades estruturadas (ligue, pinte, complete etc.). Não há variação de material ao longo do tempo.</p>
-                                <select id="SEC_III_2_3_1_1" name="SEC_III_2_3_1_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_3_1_2">2. Uso predominante de folhas com propostas pré-prontas</label>
-                                <p class="field-description">A maior parte do tempo é dedicada a propostas em folhas estruturadas, mesmo que haja algum momento pontual de produção livre.</p>
-                                <select id="SEC_III_2_3_1_2" name="SEC_III_2_3_1_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_3_1_3">3. Uso de materiais não estruturados para produções individuais</label>
-                                <p class="field-description">O professor propõe com regularidade produções em que a criança escolhe materiais como papéis diversos, lápis de cor, tintas, colagens, etc.</p>
-                                <select id="SEC_III_2_3_1_3" name="SEC_III_2_3_1_3">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_2_3_1_4">4. Uso de materiais bidimensionais e tridimensionais com intencionalidade</label>
-                                <p class="field-description">A criança tem tempo significativo de acesso a argila, massinha, tecidos, madeira, carvão, giz, tintas etc., para explorar formas de expressão variadas.</p>
-                                <select id="SEC_III_2_3_1_4" name="SEC_III_2_3_1_4">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label><strong>Pergunta de síntese para análise da coordenadora</strong></label>
-                                <p>Durante o tempo observado, qual tipo de material predominou nas experiências de produção individual das crianças?</p>
-                                
-                                <div class="checkbox-group">
-                                    <div class="checkbox-item">
-                                        <label for="SEC_III_CHECKBOX_1">Folhas pré-prontas (xerox)</label>
-                                        <select id="SEC_III_CHECKBOX_1" name="SEC_III_CHECKBOX_1">
-                                            <option value="">Selecione</option>
-                                            <option value="SIM">SIM</option>
-                                            <option value="NÃO">NÃO</option>
-                                        </select>
-                                    </div>
-                                    <div class="checkbox-item">
-                                        <label for="SEC_III_CHECKBOX_2">Materiais bidimensionais (papel, lápis, tinta etc.)</label>
-                                        <select id="SEC_III_CHECKBOX_2" name="SEC_III_CHECKBOX_2">
-                                            <option value="">Selecione</option>
-                                            <option value="SIM">SIM</option>
-                                            <option value="NÃO">NÃO</option>
-                                        </select>
-                                    </div>
-                                    <div class="checkbox-item">
-                                        <label for="SEC_III_CHECKBOX_3">Materiais tridimensionais (argila, massinha, etc.)</label>
-                                        <select id="SEC_III_CHECKBOX_3" name="SEC_III_CHECKBOX_3">
-                                            <option value="">Selecione</option>
-                                            <option value="SIM">SIM</option>
-                                            <option value="NÃO">NÃO</option>
-                                        </select>
-                                    </div>
-                                    <div class="checkbox-item">
-                                        <label for="SEC_III_CHECKBOX_4">Combinação equilibrada de diferentes materiais</label>
-                                        <select id="SEC_III_CHECKBOX_4" name="SEC_III_CHECKBOX_4">
-                                            <option value="">Selecione</option>
-                                            <option value="SIM">SIM</option>
-                                            <option value="NÃO">NÃO</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>3. Mediação Individual</h4>
-                        <div class="form-group">
-                            <label for="SEC_III_3_1">Identifica dificuldades e propõe pistas ou perguntas de apoio para que as crianças avancem na atividade ou situação</label>
-                            <select id="SEC_III_3_1" name="SEC_III_3_1">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="PARCIAL">PARCIAL</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_3_2">Modela ou demonstra estratégias quando a criança não consegue realizar a atividade</label>
-                            <select id="SEC_III_3_2" name="SEC_III_3_2">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="PARCIAL">PARCIAL</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_3_3">Estimula a autonomia para realizar a atividade sem antecipar soluções</label>
-                            <select id="SEC_III_3_3" name="SEC_III_3_3">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="PARCIAL">PARCIAL</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_3_4">Atende com sensibilidade crianças com deficiência</label>
-                            <select id="SEC_III_3_4" name="SEC_III_3_4">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="PARCIAL">PARCIAL</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_3_5">Usa cantinhos ou pequenos grupos para mediação individualizada</label>
-                            <select id="SEC_III_3_5" name="SEC_III_3_5">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="PARCIAL">PARCIAL</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_3_6">Estimula a autoconfiança das crianças para realizar a atividade</label>
-                            <select id="SEC_III_3_6" name="SEC_III_3_6">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="PARCIAL">PARCIAL</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_3_7">Dar feedback para as produções individuais das crianças estimulando a autoconfiança e a autonomia</label>
-                            <select id="SEC_III_3_7" name="SEC_III_3_7">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="PARCIAL">PARCIAL</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>4. Respeito e Proteção à Integridade</h4>
-                        
-                        <div class="sub-subsection">
-                            <h5>4.1 Interações Verbais e Físicas</h5>
-                            <div class="form-group">
-                                <label for="SEC_III_4_1_1">Realiza interações verbais negativas</label>
-                                <select id="SEC_III_4_1_1" name="SEC_III_4_1_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                                <label for="SEC_III_4_1_1_OBS">Observação</label>
-                                <input type="text" id="SEC_III_4_1_1_OBS" name="SEC_III_4_1_1_OBS">
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_1_2">Utiliza interações físicas inadequadas</label>
-                                <select id="SEC_III_4_1_2" name="SEC_III_4_1_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                                <label for="SEC_III_4_1_2_OBS">Observação</label>
-                                <input type="text" id="SEC_III_4_1_2_OBS" name="SEC_III_4_1_2_OBS">
-                            </div>
-                        </div>
-
-                        <div class="sub-subsection">
-                            <h5>4.2 Questões Étnico-raciais e de Gênero</h5>
-                            <div class="form-group">
-                                <label for="SEC_III_4_2_1">Respeita a diversidade étnico-racial: Não faz estigmatização ou ofensas</label>
-                                <select id="SEC_III_4_2_1" name="SEC_III_4_2_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                                <label for="SEC_III_4_2_1_OBS">Observação</label>
-                                <input type="text" id="SEC_III_4_2_1_OBS" name="SEC_III_4_2_1_OBS">
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_2_2">Respeita a diversidade étnico-racial e de gênero: Não faz estigmatização ou ofensas</label>
-                                <select id="SEC_III_4_2_2" name="SEC_III_4_2_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                                <label for="SEC_III_4_2_2_OBS">Observação</label>
-                                <input type="text" id="SEC_III_4_2_2_OBS" name="SEC_III_4_2_2_OBS">
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_2_3">Respeita pessoas com deficiência: Não faz estigmatização ou ofensas</label>
-                                <select id="SEC_III_4_2_3" name="SEC_III_4_2_3">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                                <label for="SEC_III_4_2_3_OBS">Observação</label>
-                                <input type="text" id="SEC_III_4_2_3_OBS" name="SEC_III_4_2_3_OBS">
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_2_4">Quando pertinente, promove discussões e debates que ajudam a construir uma visão crítica e empática</label>
-                                <select id="SEC_III_4_2_4" name="SEC_III_4_2_4">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                                <label for="SEC_III_4_2_4_OBS">Observação</label>
-                                <input type="text" id="SEC_III_4_2_4_OBS" name="SEC_III_4_2_4_OBS">
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_2_5">Reconduz comportamentos discriminatórios, de forma educativa e acolhedora, apontando que não é correto e direcionando e mostrando exemplo do comportamento que seja respeitoso</label>
-                                <select id="SEC_III_4_2_5" name="SEC_III_4_2_5">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                                <label for="SEC_III_4_2_5_OBS">Observação</label>
-                                <input type="text" id="SEC_III_4_2_5_OBS" name="SEC_III_4_2_5_OBS">
-                            </div>
-                        </div>
-
-                        <div class="sub-subsection">
-                            <h5>4.3 Gestão de Conflitos</h5>
-                            <div class="form-group">
-                                <label for="SEC_III_4_3_1">Percebe conflitos e escuta com empatia (abaixa na altura da criança, chama pelo nome, olha nos olhos)</label>
-                                <select id="SEC_III_4_3_1" name="SEC_III_4_3_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_3_2">Nomeia sentimentos e busca compreender as necessidades das crianças</label>
-                                <select id="SEC_III_4_3_2" name="SEC_III_4_3_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_3_3">Oferece mediações respeitosas e construtivas</label>
-                                <select id="SEC_III_4_3_3" name="SEC_III_4_3_3">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="sub-subsection">
-                            <h5>4.4 Segurança Física da Criança</h5>
-                            <div class="form-group">
-                                <label for="SEC_III_4_4_1">Verifica o espaço antes da chegada das crianças, retirando objetos perigosos ou inadequados</label>
-                                <select id="SEC_III_4_4_1" name="SEC_III_4_4_1">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_4_2">Posiciona tapetes, cadeiras e brinquedos de forma a evitar tropeços e escorregões</label>
-                                <select id="SEC_III_4_4_2" name="SEC_III_4_4_2">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_4_3">Interrompe prontamente situações de risco físico, como empurrões, quedas ou uso indevido de brinquedos</label>
-                                <select id="SEC_III_4_4_3" name="SEC_III_4_4_3">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_4_4">Incentiva práticas de higiene com apoio e orientação (ex: lavar as mãos antes das refeições)</label>
-                                <select id="SEC_III_4_4_4" name="SEC_III_4_4_4">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_4_5">Oferece ajuda durante a alimentação e troca, com cuidado e atenção individualizada</label>
-                                <select id="SEC_III_4_4_5" name="SEC_III_4_4_5">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="SEC_III_4_4_6">Garante que os brinquedos e materiais utilizados sejam adequados à faixa etária quanto aos aspectos de segurança, por exemplo o risco de tesoura muito afiada para crianças muito pequenas ou elementos que colocam na boca e possam engasgar</label>
-                                <select id="SEC_III_4_4_6" name="SEC_III_4_4_6">
-                                    <option value="">Selecione</option>
-                                    <option value="SIM">SIM</option>
-                                    <option value="PARCIAL">PARCIAL</option>
-                                    <option value="NÃO">NÃO</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>5. Gestão dos Cuidados e Promoção da Autonomia</h4>
-                        <div class="form-group">
-                            <label for="SEC_III_5_1">As rotinas de cuidado são mediadas com incentivo à autonomia (incentiva as crianças a realizar por conta própria, mostrando como faz ou permitindo realizar sozinha e estimula a autoconfiança, dizendo a criança que ela é capaz, corajosa)</label>
-                            <select id="SEC_III_5_1" name="SEC_III_5_1">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="PARCIAL">PARCIAL</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_5_2">Há acompanhamento adulto nos momentos de cuidado e transição entre espaços e ações</label>
-                            <select id="SEC_III_5_2" name="SEC_III_5_2">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="PARCIAL">PARCIAL</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_5_3">Estimula que as crianças organizem pertences, limpem e sirvam-se quando possível</label>
-                            <select id="SEC_III_5_3" name="SEC_III_5_3">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="PARCIAL">PARCIAL</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>6. Uso do Material de Apoio do Professor (Pré-Escolas)</h4>
-                        <p><strong>Objetivo:</strong> Avaliar a presença e a qualidade do uso do material de apoio ao professor proposto pelo currículo ou rede, considerando sua adaptação, frequência e articulação com as necessidades reais das crianças.</p>
-                        
-                        <div class="form-group">
-                            <label for="SEC_III_6_1">1. O material de apoio ao professor é utilizado com regularidade</label>
-                            <p class="field-description">O professor utiliza o material como referência constante nas suas práticas (planejamento, propostas, intervenções).</p>
-                            <select id="SEC_III_6_1" name="SEC_III_6_1">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_III_6_1_OBS">Observação</label>
-                            <input type="text" id="SEC_III_6_1_OBS" name="SEC_III_6_1_OBS">
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_6_2">2. O material de apoio ao professor é adaptado à realidade das crianças</label>
-                            <p class="field-description">As propostas do material são ajustadas conforme o contexto, interesses e desenvolvimento das crianças.</p>
-                            <select id="SEC_III_6_2" name="SEC_III_6_2">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_III_6_2_OBS">Observação</label>
-                            <input type="text" id="SEC_III_6_2_OBS" name="SEC_III_6_2_OBS">
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_6_3">3. As práticas são excessivamente dependentes do material de apoio ao professor</label>
-                            <p class="field-description">A maior parte das atividades segue rigidamente o material, sem espaço para propostas livres, criações próprias ou ajustes.</p>
-                            <select id="SEC_III_6_3" name="SEC_III_6_3">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_III_6_3_OBS">Observação</label>
-                            <input type="text" id="SEC_III_6_3_OBS" name="SEC_III_6_3_OBS">
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_6_4">4. O material de apoio ao professor é usado como referência, mas há ampliação e criação pelo professor</label>
-                            <p class="field-description">O professor parte do material, mas cria variações, amplia experiências e propõe práticas significativas com base nas crianças.</p>
-                            <select id="SEC_III_6_4" name="SEC_III_6_4">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_III_6_4_OBS">Observação</label>
-                            <input type="text" id="SEC_III_6_4_OBS" name="SEC_III_6_4_OBS">
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_III_6_5">5. O material de apoio ao professor é integrado às demais dimensões do trabalho pedagógico</label>
-                            <p class="field-description">Há articulação entre o material estruturado e outros eixos da prática (espaço, brincadeira, cuidado, linguagem etc.).</p>
-                            <select id="SEC_III_6_5" name="SEC_III_6_5">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_III_6_5_OBS">Observação</label>
-                            <input type="text" id="SEC_III_6_5_OBS" name="SEC_III_6_5_OBS">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="SEC_III_OBS_COORDENADORA">Observações da coordenadora (exemplos, reações das crianças, como o material de apoio ao professor foi utilizado):</label>
-                            <textarea id="SEC_III_OBS_COORDENADORA" name="SEC_III_OBS_COORDENADORA" rows="3"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label><strong>Pergunta de síntese para análise da coordenadora</strong></label>
-                            <p>Durante o tempo observado, a maior parte das práticas estava baseada em que tipo de organização?</p>
-                            
-                            <div class="checkbox-group">
-                                <div class="checkbox-item">
-                                    <label for="SEC_III_CHECKBOX_5">Material de apoio ao professor, com adaptação ao contexto</label>
-                                    <select id="SEC_III_CHECKBOX_5" name="SEC_III_CHECKBOX_5">
-                                        <option value="">Selecione</option>
-                                        <option value="SIM">SIM</option>
-                                        <option value="NÃO">NÃO</option>
-                                    </select>
-                                </div>
-                                <div class="checkbox-item">
-                                    <label for="SEC_III_CHECKBOX_6">Material de apoio ao professor, sem adaptação</label>
-                                    <select id="SEC_III_CHECKBOX_6" name="SEC_III_CHECKBOX_6">
-                                        <option value="">Selecione</option>
-                                        <option value="SIM">SIM</option>
-                                        <option value="NÃO">NÃO</option>
-                                    </select>
-                                </div>
-                                <div class="checkbox-item">
-                                    <label for="SEC_III_CHECKBOX_7">Equilíbrio entre material de apoio ao professor e propostas criadas pelo professor</label>
-                                    <select id="SEC_III_CHECKBOX_7" name="SEC_III_CHECKBOX_7">
-                                        <option value="">Selecione</option>
-                                        <option value="SIM">SIM</option>
-                                        <option value="NÃO">NÃO</option>
-                                    </select>
-                                </div>
-                                <div class="checkbox-item">
-                                    <label for="SEC_III_CHECKBOX_8">Propostas majoritariamente livres, não baseadas no material de apoio ao professor</label>
-                                    <select id="SEC_III_CHECKBOX_8" name="SEC_III_CHECKBOX_8">
-                                        <option value="">Selecione</option>
-                                        <option value="SIM">SIM</option>
-                                        <option value="NÃO">NÃO</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="SEC_III_COMENTARIO">Comentários e Sugestões Formativas:</label>
-                            <textarea id="SEC_III_COMENTARIO" name="SEC_III_COMENTARIO" rows="3"></textarea>
-                        </div>
-                    </div>
-                </div>
+            <div>
+              <label class="field">Dia:</label>
+              <input type="text" name="SEC_III_DIA">
             </div>
-
-            <!-- SEÇÃO IV -->
-            <div class="accordion-item">
-                <button type="button" class="accordion-header" data-section="section4">
-                    <span class="accordion-number">IV</span>
-                    <span class="accordion-title">Avaliação e Registro</span>
-                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6,9 12,15 18,9"></polyline>
-                    </svg>
-                </button>
-                <div class="accordion-content" id="section4">
-                    <div class="subsection">
-                        <h4>Ficha de Análise Documental - Avaliação, Registros e Replanejamento</h4>
-                        
-                        <div class="form-group">
-                            <label for="SEC_IV_1">A avaliação da prática e/ou das crianças é utilizada para replanejar?</label>
-                            <select id="SEC_IV_1" name="SEC_IV_1">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_IV_2">A avaliação das crianças é realizada de modo que o registro evidencie o progresso das aprendizagens?</label>
-                            <select id="SEC_IV_2" name="SEC_IV_2">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_IV_3">O registro do progresso das crianças é organizado de forma que as famílias consigam interpretar (ex: com fotos, legendas simples e diretas)?</label>
-                            <select id="SEC_IV_3" name="SEC_IV_3">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_IV_4">As famílias têm acesso ao progresso individual das crianças?</label>
-                            <select id="SEC_IV_4" name="SEC_IV_4">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_IV_5">As famílias têm acesso ao progresso coletivo da turma e/ou escola?</label>
-                            <select id="SEC_IV_5" name="SEC_IV_5">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_IV_6">O registro é usado como instrumento de compartilhamento entre professores, em momentos coletivos?</label>
-                            <select id="SEC_IV_6" name="SEC_IV_6">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_IV_7">O registro é escrito e/ou legendado com foco nas aprendizagens previstas na BNCC e no INAPI?</label>
-                            <select id="SEC_IV_7" name="SEC_IV_7">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_IV_8">O registro contempla tanto as potencialidades quanto as dificuldades das crianças?</label>
-                            <select id="SEC_IV_8" name="SEC_IV_8">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_IV_9">As potencialidades registradas envolvem diferentes dimensões (ex: expressão e comunicação; autonomia, autocuidado e autoconfiança; imaginação, investigação; socialização)?</label>
-                            <select id="SEC_IV_9" name="SEC_IV_9">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_IV_10">Os registros são usados pelo professor para comunicar suas boas práticas?</label>
-                            <select id="SEC_IV_10" name="SEC_IV_10">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+            <div>
+              <label class="field">Mês:</label>
+              <input type="text" name="SEC_III_MES">
             </div>
-
-            <!-- SEÇÃO V -->
-            <div class="accordion-item">
-                <button type="button" class="accordion-header" data-section="section5">
-                    <span class="accordion-number">V</span>
-                    <span class="accordion-title">Acolhimento Afetivo ao Professor</span>
-                    <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="6,9 12,15 18,9"></polyline>
-                    </svg>
-                </button>
-                <div class="accordion-content" id="section5">
-                    <div class="subsection">
-                        <h4>Parte 1 – Perguntas e Escuta Ativa</h4>
-                        <p>(individuais ou em pequenos grupos, sugeridas para momentos de roda de conversa com equipe, entrevistas individuais ou devolutivas pedagógicas)</p>
-                        
-                        <div class="form-group">
-                            <label for="SEC_V_1_1">Como você tem se sentido ultimamente em relação ao seu trabalho?</label>
-                            <textarea id="SEC_V_1_1" name="SEC_V_1_1" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_1_2">Tem conseguido equilibrar o trabalho com seus momentos de descanso e lazer?</label>
-                            <textarea id="SEC_V_1_2" name="SEC_V_1_2" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_1_3">Em quais momentos do dia você sente que está mais sobrecarregado(a)?</label>
-                            <textarea id="SEC_V_1_3" name="SEC_V_1_3" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_1_4">Tem sentido apoio da coordenação e da equipe?</label>
-                            <textarea id="SEC_V_1_4" name="SEC_V_1_4" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_1_5">Consegue identificar o que tem te ajudado a seguir nos dias mais difíceis?</label>
-                            <textarea id="SEC_V_1_5" name="SEC_V_1_5" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_1_6">O que você gostaria que fosse diferente no cotidiano da escola para se sentir mais acolhido(a)?</label>
-                            <textarea id="SEC_V_1_6" name="SEC_V_1_6" rows="3"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Parte 2 – Comportamentos Observáveis no Cotidiano Escolar</h4>
-                        
-                        <div class="form-group">
-                            <label for="SEC_V_2_1">Demonstra cansaço frequente ou exaustão física/emocional</label>
-                            <select id="SEC_V_2_1" name="SEC_V_2_1">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_V_2_1_OBS">Observação</label>
-                            <textarea id="SEC_V_2_1_OBS" name="SEC_V_2_1_OBS" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_2_2">Mostra-se desmotivado(a) com o planejamento e as interações com as crianças</label>
-                            <select id="SEC_V_2_2" name="SEC_V_2_2">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_V_2_2_OBS">Observação</label>
-                            <textarea id="SEC_V_2_2_OBS" name="SEC_V_2_2_OBS" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_2_3">Isola-se da equipe ou evita momentos de trocas e coletivos</label>
-                            <select id="SEC_V_2_3" name="SEC_V_2_3">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_V_2_3_OBS">Observação</label>
-                            <textarea id="SEC_V_2_3_OBS" name="SEC_V_2_3_OBS" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_2_4">Apresenta irritabilidade ou impaciência com as crianças</label>
-                            <select id="SEC_V_2_4" name="SEC_V_2_4">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_V_2_4_OBS">Observação</label>
-                            <textarea id="SEC_V_2_4_OBS" name="SEC_V_2_4_OBS" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_2_5">Demonstra ansiedade ou estresse visível</label>
-                            <select id="SEC_V_2_5" name="SEC_V_2_5">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_V_2_5_OBS">Observação</label>
-                            <textarea id="SEC_V_2_5_OBS" name="SEC_V_2_5_OBS" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_2_6">Apresenta dificuldades de concentração ou esquecimentos frequentes</label>
-                            <select id="SEC_V_2_6" name="SEC_V_2_6">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_V_2_6_OBS">Observação</label>
-                            <textarea id="SEC_V_2_6_OBS" name="SEC_V_2_6_OBS" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_2_7">Expressa sentimentos de sobrecarga ou falta de tempo</label>
-                            <select id="SEC_V_2_7" name="SEC_V_2_7">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_V_2_7_OBS">Observação</label>
-                            <textarea id="SEC_V_2_7_OBS" name="SEC_V_2_7_OBS" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_2_8">Demonstra entusiasmo e energia nas atividades pedagógicas</label>
-                            <select id="SEC_V_2_8" name="SEC_V_2_8">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_V_2_8_OBS">Observação</label>
-                            <textarea id="SEC_V_2_8_OBS" name="SEC_V_2_8_OBS" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_2_9">Busca apoio da coordenação quando necessário</label>
-                            <select id="SEC_V_2_9" name="SEC_V_2_9">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_V_2_9_OBS">Observação</label>
-                            <textarea id="SEC_V_2_9_OBS" name="SEC_V_2_9_OBS" rows="2"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_2_10">Participa ativamente de momentos coletivos e formações</label>
-                            <select id="SEC_V_2_10" name="SEC_V_2_10">
-                                <option value="">Selecione</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NÃO">NÃO</option>
-                            </select>
-                            <label for="SEC_V_2_10_OBS">Observação</label>
-                            <textarea id="SEC_V_2_10_OBS" name="SEC_V_2_10_OBS" rows="2"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="subsection">
-                        <h4>Observações Gerais e Plano de Acolhimento</h4>
-                        <div class="form-group">
-                            <label for="SEC_V_OBS_GERAIS">Observações gerais sobre o bem-estar do professor:</label>
-                            <textarea id="SEC_V_OBS_GERAIS" name="SEC_V_OBS_GERAIS" rows="4"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="SEC_V_PLANO_ACOLHIMENTO">Plano de acolhimento e suporte (ações a serem implementadas):</label>
-                            <textarea id="SEC_V_PLANO_ACOLHIMENTO" name="SEC_V_PLANO_ACOLHIMENTO" rows="4"></textarea>
-                        </div>
-                    </div>
-                </div>
+            <div>
+              <label class="field">Ano:</label>
+              <input type="text" name="SEC_III_ANO">
             </div>
-
-            <!-- Botões de Ação -->
-            <div class="action-buttons">
-                <button type="button" id="salvarRascunho" class="btn btn-secondary">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                        <polyline points="17,21 17,13 7,13 7,21"></polyline>
-                        <polyline points="7,3 7,8 15,8"></polyline>
-                    </svg>
-                    Salvar Rascunho
-                </button>
-                <button type="button" id="gerarPDF" class="btn btn-primary">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14,2 14,8 20,8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                        <polyline points="10,9 9,9 8,9"></polyline>
-                    </svg>
-                    Gerar PDF
-                </button>
-                <a href="#" id="compartilharWhatsApp" class="btn btn-success">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                    </svg>
-                    Compartilhar no WhatsApp
-                </a>
+            <div>
+              <label class="field">Observador(a):</label>
+              <input type="text" name="SEC_III_OBSERVADOR">
             </div>
-        </form>
+          </div>
+
+          <!-- 1. Estratégias Didáticas (1.1 a 1.4) -->
+          <div class="form-row">
+            <label class="field"><b>1. Estrategias Didáticas</b> (1.1 Ampliação de repertório etc.)</label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Realiza leitura ou contação de histórias.</label>
+            <select name="SEC_III_1.1_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Faz uso de perguntas abertas para instigar o pensamento, o diálogo, a organização da fala por parte das crianças.</label>
+            <select name="SEC_III_1.1_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Utiliza materiais adequados ao tema e/ou à faixa etária.</label>
+            <select name="SEC_III_1.1_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Estimula a curiosidade e a formulação de hipóteses.</label>
+            <select name="SEC_III_1.1_4">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 1.2 -->
+          <div class="form-row">
+            <label class="field">Utiliza abordagem lúdica (brincadeiras, jogos, cantigas) promovendo aprendizagens.</label>
+            <select name="SEC_III_1.2_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Busca envolver todas ou a maior parte das crianças, citando nomes, chamando para participar, incluindo-as nas decisões.</label>
+            <select name="SEC_III_1.2_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Apresenta conteúdos novos conectando com o cotidiano/realidade de vida das crianças fora da Unidade Escolar.</label>
+            <select name="SEC_III_1.2_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 1.3 Brincadeira -->
+          <div class="form-row">
+            <label class="field">Brincadeira livre: organiza previamente materiais, tempos e espaços destinados a essa vivência.</label>
+            <select name="SEC_III_1.3_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Brincadeira livre: observa e acompanha as escolhas das crianças, intervindo com mediações sutis para ampliar a aprendizagem.</label>
+            <select name="SEC_III_1.3_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Brincadeira dirigida e jogos: professor organiza as brincadeiras mediando as ações com clareza permitindo a interação entre as crianças favorecendo o alcance dos objetivos propostos;</label>
+            <select name="SEC_III_1.3_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Observação: professor observa as interações sem interferir (exceto quando necessário), para constatar o desenvolvimento durante as vivências, fazendo registros e escuta ativa.</label>
+            <select name="SEC_III_1.3_4">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 1.4 Tipos de Práticas -->
+          <div class="form-row">
+            <label class="field">Práticas que promovem expressão e comunicação (práticas relacionadas à oralidade, leitura, registros gráficos - desenhos, garatujas, letras, palavras, nome, textos coletivos, etc.)</label>
+            <select name="SEC_III_1.4_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Práticas que promovem autonomia, autocuidado, autoconfiança</label>
+            <select name="SEC_III_1.4_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Práticas que promovem imaginação, investigação, transformações e criação (práticas relacionadas à contagem oral, relações de quantidade, levantamento de hipóteses, registros numéricos, etc.)</label>
+            <select name="SEC_III_1.4_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Práticas que promovem socialização: empatia, cooperação e autorregulação</label>
+            <select name="SEC_III_1.4_4">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 2. Gestão do Grupo (2.1 Tempo e Rotina etc.) -->
+          <div class="form-row">
+            <label class="field"><b>2. Gestão do Grupo</b></label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Estimula a interação entre as crianças durante as vivências propostas, a partir da organização dos espaços, materiais e tempo.</label>
+            <select name="SEC_III_2.1_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">A rotina diária do professor (impressa ou afixada) contempla a prática da leitura e/ou contação de história.</label>
+            <select name="SEC_III_2.1_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">O professor organiza o tempo de modo que não cansa as crianças.</label>
+            <select name="SEC_III_2.1_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Alterna entre momentos coletivos e individuais com fluidez.</label>
+            <select name="SEC_III_2.1_4">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Garante tempo de qualidade para interações entre crianças.</label>
+            <select name="SEC_III_2.1_5">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Evita tempos de espera; propõe atividades paralelas durante atendimentos individuais.</label>
+            <select name="SEC_III_2.1_6">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Durante a rotina, o ritmo das crianças é respeitado — evita acelerar, interromper ou conter.</label>
+            <select name="SEC_III_2.1_7">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">A área externa é utilizada pelo menos por 30 minutos.</label>
+            <select name="SEC_III_2.1_8">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">As crianças não são deixadas sozinhas por mais de 5 minutos.</label>
+            <select name="SEC_III_2.1_9">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 2.2 Espaço -->
+          <div class="form-row">
+            <label class="field">Organizar agrupamentos variados (duplas, trios, grandes grupos)</label>
+            <select name="SEC_III_2.2_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Propõe atividades na área externa com organização e segurança para exploração ativa e segura</label>
+            <select name="SEC_III_2.2_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Há exposto na sala de referência painéis de uso cotidiano para aprendizagens das crianças (Rotina, Calendário, Chamadinha, Palavras do Cotidiano, Alfabetos, Números)</label>
+            <select name="SEC_III_2.2_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 2.3 Materiais -->
+          <div class="form-row">
+            <label class="field">Permite acesso livre aos materiais para criação e brincadeira.</label>
+            <select name="SEC_III_2.3_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Seleciona os materiais de acordo com a proposta e faixa etária — a maioria das crianças consegue usar com autonomia.</label>
+            <select name="SEC_III_2.3_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Os materiais são alocados na altura das crianças com intenção de envolvê-las na construção das aprendizagens.</label>
+            <select name="SEC_III_2.3_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Os cartazes/painéis estão alocados na parede na altura das crianças com intenção de retomar rotinas, registros e combinados feitos com elas.</label>
+            <select name="SEC_III_2.3_4">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Os materiais são alocados na parede na altura das crianças com intenção de gerar pertencimento e acolhimento às crianças.</label>
+            <select name="SEC_III_2.3_5">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Os materiais são utilizados com intenção pedagógica (riscadores, pinceis, tintas, materiais não estruturados, brinquedos, blocos lógicos, alfabetos e números móveis), de forma variada, e favorecem a criação por parte das crianças.</label>
+            <select name="SEC_III_2.3_6">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 2.3.1 Uso do material nas produções individuais das crianças -->
+          <div class="form-row">
+            <label class="field"><b>2.3.1 Uso do material nas produções individuais das crianças</b></label>
+            <label class="field">Dimensão Transversal: Relação tempo x tipo de material utilizado</label>
+            <label class="field"><b>Objetivo:</b> Identificar o equilíbrio (ou desequilíbrio) entre o tempo dedicado a diferentes tipos de material nas propostas de produção individual das crianças.</label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">1. Uso exclusivo de folhas com propostas pré-prontas</label>
+            <select name="SEC_III_2.3.1_1_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">2. Uso predominante de folhas com propostas pré-prontas</label>
+            <select name="SEC_III_2.3.1_2_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">3. Uso de materiais não estruturados para produções individuais</label>
+            <select name="SEC_III_2.3.1_3_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">4. Uso de materiais bidimensionais e tridimensionais com intencionalidade</label>
+            <select name="SEC_III_2.3.1_4_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- Síntese para análise da coordenadora -->
+          <div class="form-row">
+            <label class="field">Durante o tempo observado, qual tipo de material predominou nas experiências de produção individual das crianças?</label>
+            <label class="field">Folhas pré-prontas (xerox)</label>
+            <select name="SEC_III_CHECKBOX_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+
+            <label class="field">Materiais bidimensionais (papel, lápis, tinta etc.)</label>
+            <select name="SEC_III_CHECKBOX_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+
+            <label class="field">Materiais tridimensionais (argila, massinha, etc.)</label>
+            <select name="SEC_III_CHECKBOX_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+
+            <label class="field">Combinação equilibrada de diferentes materiais</label>
+            <select name="SEC_III_CHECKBOX_4">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 3. Mediação Individual -->
+          <div class="form-row">
+            <label class="field"><b>3. Mediação Individual</b></label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Identifica dificuldades e propõe pistas ou perguntas de apoio para que as crianças avancem na atividade ou situação.</label>
+            <select name="SEC_III_3_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Modela ou demonstra estratégias quando a criança não consegue realizar a atividade.</label>
+            <select name="SEC_III_3_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Estimula a autonomia para realizar a atividade sem antecipar soluções.</label>
+            <select name="SEC_III_3_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Atende com sensibilidade crianças com deficiência.</label>
+            <select name="SEC_III_3_4">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Usa cantinhos ou pequenos grupos para mediação individualizada.</label>
+            <select name="SEC_III_3_5">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Estimula a autoconfiança das crianças para realizar a atividade.</label>
+            <select name="SEC_III_3_6">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Dar feedback para as produções individuais das crianças estimulando a autoconfiança e a autonomia.</label>
+            <select name="SEC_III_3_7">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 4. Respeito e Proteção à Integridade -->
+          <div class="form-row">
+            <label class="field"><b>4. Respeito e Proteção à Integridade</b></label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Realiza interações verbais negativas.</label>
+            <select name="SEC_III_4_1_1_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_4.1_1_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Utiliza interações físicas inadequadas.</label>
+            <select name="SEC_III_4_1_2_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_4.1_2_OBS">
+          </div>
+
+          <!-- 4.2 Étnico-raciais e Gênero -->
+          <div class="form-row">
+            <label class="field">Respeita a diversidade étnico-racial: Não faz estigmatização ou ofensas.</label>
+            <select name="SEC_III_4_2_1_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_4.2_1_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Respeita a diversidade étnico-racial e de gênero: Não faz estigmatização ou ofensas.</label>
+            <select name="SEC_III_4_2_2_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_4.2_2_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Respeita pessoas com deficiência: Não faz estigmatização ou ofensas.</label>
+            <select name="SEC_III_4_2_3_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_4.2_3_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Quando pertinente, promove discussões e debates que ajudam a construir uma visão crítica e empática.</label>
+            <select name="SEC_III_4_2_4_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_4.2_4_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Reconduz comportamentos discriminatórios, de forma educativa e acolhedora, apontando que não é correto e direcionando e mostrando exemplo do comportamento que seja respeitoso.</label>
+            <select name="SEC_III_4_2_5_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_4.2_5_OBS">
+          </div>
+
+          <!-- 4.3 Gestão de Conflitos -->
+          <div class="form-row">
+            <label class="field">Percebe conflitos e escuta com empatia (abaixa na altura da criança, chama pelo nome, olha nos olhos).</label>
+            <select name="SEC_III_4.3_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Nomeia sentimentos e busca compreender as necessidades das crianças.</label>
+            <select name="SEC_III_4.3_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Oferece mediações respeitosas e construtivas.</label>
+            <select name="SEC_III_4.3_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 4.4 Segurança Física -->
+          <div class="form-row">
+            <label class="field">Verifica o espaço antes da chegada das crianças, retirando objetos perigosos ou inadequados.</label>
+            <select name="SEC_III_4.4_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Posiciona tapetes, cadeiras e brinquedos de forma a evitar tropeços e escorregões.</label>
+            <select name="SEC_III_4.4_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Interrompe prontamente situações de risco físico, como empurrões, quedas ou uso indevido de brinquedos.</label>
+            <select name="SEC_III_4.4_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Incentiva práticas de higiene com apoio e orientação (ex: lavar as mãos antes das refeições).</label>
+            <select name="SEC_III_4.4_4">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Oferece ajuda durante a alimentação e troca, com cuidado e atenção individualizada.</label>
+            <select name="SEC_III_4.4_5">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Garante que os brinquedos e materiais utilizados sejam adequados à faixa etária quanto aos aspectos de segurança (risco de peças pequenas, tesouras afiadas etc.).</label>
+            <select name="SEC_III_4.4_6">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 5. Gestão dos Cuidados e Promoção da Autonomia -->
+          <div class="form-row">
+            <label class="field">As rotinas de cuidado são mediadas com incentivo à autonomia (incentiva as crianças a realizar por conta própria, mostrando como faz ou permitindo realizar sozinha e estimula a autoconfiança, dizendo a criança que ela é capaz, corajosa)</label>
+            <select name="SEC_III_5_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Há acompanhamento adulto nos momentos de cuidado e transição entre espaços e ações.</label>
+            <select name="SEC_III_5_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Estimula que as crianças organizem pertences, limpem e sirvam-se quando possível.</label>
+            <select name="SEC_III_5_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="PARCIAL">PARCIAL</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <!-- 6. Uso do material de apoio do professor -->
+          <div class="form-row">
+            <label class="field"><b>6. Uso do Material de Apoio do Professor (Pré-Escolas)</b></label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">O material de apoio ao professor é utilizado com regularidade</label>
+            <select name="SEC_III_6_1_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_6_1_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">As propostas do material são ajustadas conforme o contexto, interesses e desenvolvimento das crianças.</label>
+            <select name="SEC_III_6_2_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_6_2_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">As práticas são excessivamente dependentes do material de apoio ao professor</label>
+            <select name="SEC_III_6_3_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_6_3_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">O material de apoio ao professor é usado como referência, mas há ampliação e criação pelo professor</label>
+            <select name="SEC_III_6_4_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_6_4_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">O material de apoio ao professor é integrado às demais dimensões do trabalho pedagógico</label>
+            <select name="SEC_III_6_5_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_III_6_5_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Observações da coordenadora (exemplos, reações das crianças, como o material de apoio ao professor foi utilizado):</label>
+            <input type="text" name="SEC_III_OBS_COORDENADORA">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Durante o tempo observado, a maior parte das práticas estava baseada em que tipo de organização?</label>
+            <label class="field">Material de apoio ao professor, com adaptação ao contexto</label>
+            <select name="SEC_III_CHECKBOX_5">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+
+            <label class="field">Material de apoio ao professor, sem adaptação</label>
+            <select name="SEC_III_CHECKBOX_6">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+
+            <label class="field">Equilíbrio entre material de apoio ao professor e propostas criadas pelo professor</label>
+            <select name="SEC_III_CHECKBOX_7">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+
+            <label class="field">Propostas majoritariamente livres, não baseadas no material de apoio ao professor</label>
+            <select name="SEC_III_CHECKBOX_8">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Comentários e Sugestões Formativas:</label>
+            <input type="text" name="SEC_III_COMENTARIO">
+          </div>
+
+        </div>
+
+        <!-- ===========================================================
+             SEÇÃO IV - AVALIAÇÃO E REGISTRO
+             Comentário: registros, avaliação e replanejamento.
+             ============================================================ -->
+        <button type="button" class="accordion accent-4" data-panel="secao4" aria-expanded="false" id="secao4Btn">
+          <div class="left">
+            <span class="acc-icon" aria-hidden="true">4</span>
+            <div>
+              <span class="acc-title">SEÇÃO IV - AVALIAÇÃO E REGISTRO</span>
+              <span class="acc-sub">Ficha de análise documental, registros e uso para replanejamento.</span>
+            </div>
+          </div>
+          <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div id="secao4" class="panel" aria-hidden="true">
+          <div class="form-row">
+            <label class="field">A avaliação da prática e/ou das crianças é utilizada para replanejar?</label>
+            <select name="SEC_IV_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">A avaliação das crianças é realizada de modo que o registro evidencie o progresso das aprendizagens?</label>
+            <select name="SEC_IV_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">O registro do progresso das crianças é organizado de forma que as famílias consigam interpretar (ex: com fotos, legendas simples e diretas)?</label>
+            <select name="SEC_IV_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">As famílias têm acesso ao progresso individual das crianças?</label>
+            <select name="SEC_IV_4">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">As famílias têm acesso ao progresso coletivo da turma e/ou escola?</label>
+            <select name="SEC_IV_5">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">O registro é usado como instrumento de compartilhamento entre professores, em momentos coletivos?</label>
+            <select name="SEC_IV_6">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">O registro é escrito e/ou legendado com foco nas aprendizagens previstas na BNCC e no INAPI?</label>
+            <select name="SEC_IV_7">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">O registro contempla tanto as potencialidades quanto as dificuldades das crianças?</label>
+            <select name="SEC_IV_8">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">As potencialidades registradas envolvem diferentes dimensões (ex: expressão e comunicação; autonomia, autocuidado e autoconfiança; imaginação, investigação; socialização)?</label>
+            <select name="SEC_IV_9">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Os registros são usados pelo professor para comunicar suas boas práticas?</label>
+            <select name="SEC_IV_10">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ===========================================================
+             SEÇÃO V - ACOLHIMENTO AFETIVO AO PROFESSOR
+             Comentário: perguntas de escuta ativa e indicadores observáveis.
+             ============================================================ -->
+        <button type="button" class="accordion accent-5" data-panel="secao5" aria-expanded="false" id="secao5Btn">
+          <div class="left">
+            <span class="acc-icon" aria-hidden="true">5</span>
+            <div>
+              <span class="acc-title">SEÇÃO V - ACOLHIMENTO AFETIVO AO PROFESSOR</span>
+              <span class="acc-sub">Escuta, sinais observáveis e ações de apoio.</span>
+            </div>
+          </div>
+          <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div id="secao5" class="panel" aria-hidden="true">
+          <div class="form-row">
+            <label class="field"><b>Parte 1 – Perguntas e Escuta Ativa</b> (individuais ou em pequenos grupos)</label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Como você tem se sentido ultimamente em relação ao seu trabalho?</label>
+            <input type="text" name="SEC_V_1_1">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Tem conseguido equilibrar o trabalho com seus momentos de descanso e lazer?</label>
+            <input type="text" name="SEC_V_1_2">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Em quais momentos do dia você sente que está mais sobrecarregado(a)?</label>
+            <input type="text" name="SEC_V_1_3">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Tem sentido apoio da coordenação e da equipe?</label>
+            <input type="text" name="SEC_V_1_4">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Consegue identificar o que tem te ajudado a seguir nos dias mais difíceis?</label>
+            <input type="text" name="SEC_V_1_5">
+          </div>
+
+          <div class="form-row">
+            <label class="field">O que você gostaria que fosse diferente no cotidiano da escola para se sentir mais acolhido(a)?</label>
+            <input type="text" name="SEC_V_1_6">
+          </div>
+
+          <div class="form-row">
+            <label class="field"><b>Parte 2 – Comportamentos Observáveis no Cotidiano Escolar</b></label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Demonstra cansaço frequente ou exaustão física/emocional</label>
+            <select name="SEC_V_2_1_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_V_2_1_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Mostra-se desmotivado(a) com o planejamento e as interações com as crianças</label>
+            <select name="SEC_V_2_2_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_V_2_2_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Isola-se da equipe ou evita momentos de trocas e coletivos</label>
+            <select name="SEC_V_2_3_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_V_2_3_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Relata dificuldade de concentração ou esquecimento constante</label>
+            <select name="SEC_V_2_4_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_V_2_4_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Apresenta variações de humor que interferem na rotina com as crianças</label>
+            <select name="SEC_V_2_5_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_V_2_5_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Demonstra prazer, entusiasmo ou envolvimento nas práticas com as crianças</label>
+            <select name="SEC_V_2_6_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_V_2_6_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Procura a coordenação para conversar ou pedir apoio</label>
+            <select name="SEC_V_2_7_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_V_2_7_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Participa das formações com interesse e disponibilidade</label>
+            <select name="SEC_V_2_8_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_V_2_8_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Consegue nomear seus sentimentos e comunicar suas necessidades</label>
+            <select name="SEC_V_2_9_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_V_2_9_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field">Utiliza estratégias saudáveis para lidar com situações desafiadoras</label>
+            <select name="SEC_V_2_10_CHECKBOX">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+            <label class="field">Observação</label>
+            <input type="text" name="SEC_V_2_10_OBS">
+          </div>
+
+          <div class="form-row">
+            <label class="field"><b>Parte 3 – Ações de Apoio (a serem planejadas com a coordenação)</b></label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Encaminhamento para escuta com equipe multiprofissional (se disponível)</label>
+            <select name="SEC_V_CHECKBOX_1">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Organização de uma rede de apoio entre pares (professores que se escutam e se apoiam)</label>
+            <select name="SEC_V_CHECKBOX_2">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Reorganização/Flexibilização temporárias da rotina/tarefas</label>
+            <select name="SEC_V_CHECKBOX_3">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Escuta ativa semanal (agenda com coordenação pedagógica)</label>
+            <select name="SEC_V_CHECKBOX_4">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="field">Incentivo ao autocuidado e pausas conscientes</label>
+            <select name="SEC_V_CHECKBOX_5">
+              <option value="">Selecione</option>
+              <option value="SIM">SIM</option>
+              <option value="NÃO">NÃO</option>
+            </select>
+          </div>
+
+        </div>
+
+        <!-- ===========================================================
+             Orientações sugeridas por seção
+             Comentário: bloco com textos orientativos para cada seção.
+             ============================================================ -->
+        <button type="button" class="accordion accent-1" data-panel="orientacoes" aria-expanded="false" id="orientBtn">
+          <div class="left">
+            <span class="acc-icon" aria-hidden="true">i</span>
+            <div>
+              <span class="acc-title">Orientações sugeridas por seção</span>
+              <span class="acc-sub">Sugestões de encaminhamento e objetivos por seção.</span>
+            </div>
+          </div>
+          <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div id="orientacoes" class="panel" aria-hidden="true">
+          <div class="form-row">
+            <label class="field"><b>Seção 1 – Escuta e acompanhamento cotidiano</b></label>
+            <p class="lead">Objetivo: compreender as percepções, desafios e propostas dos professores a partir de sua vivência diária. As coordenadoras devem observar, ao longo do cotidiano escolar, as conversas informais entre os professores e promover momentos de escuta ativa. Sugere-se realizar entrevistas semi-estruturadas de forma esporádica, com perguntas abertas que permitam aos professores expressar suas opiniões, sugestões e sentimentos sobre a prática educativa e o ambiente escolar.</p>
+          </div>
+
+          <div class="form-row">
+            <label class="field"><b>Seção 2 – Planejamento, Avaliação e Registro Pedagógico</b></label>
+            <p class="lead">Objetivo: acompanhar como o professor organiza sua prática por meio do planejamento, assegurando intencionalidade e coerência com os direitos de aprendizagem. Encaminhamento: A coordenadora deve Apoiar os professores nos planejamentos didático e avaliativo, oferecendo suporte ativo para a organização das práticas pedagógicas e dos instrumentos de registro, recomenda-se também a realização de momentos de feedback individual...</p>
+          </div>
+
+          <div class="form-row">
+            <label class="field"><b>Seção 3 – Observação da prática pedagógica</b></label>
+            <p class="lead">Objetivo: Observar como o professor medeia as interações com as crianças, promove aprendizagens e organiza o cotidiano pedagógico. Encaminhamento: A coordenadora deve realizar observações regulares da turma, anotando elementos da prática do professor...</p>
+          </div>
+
+          <div class="form-row">
+            <label class="field"><b>Seção 4 – Avaliação e Registro das Aprendizagens</b></label>
+            <p class="lead">Objetivo: entender como o professor registra e interpreta as aprendizagens das crianças, e se os registros são utilizados para replanejar. Encaminhamento: Acompanhar e apoiar os professores cotidianamente e nos dias de planejamentos didático e avaliativo...</p>
+          </div>
+
+          <div class="form-row">
+            <label class="field"><b>Seção 5 – Acolhimento afetivo e saúde emocional do professor</b></label>
+            <p class="lead">Objetivo: oferecer escuta sensível e suporte emocional ao professor. Encaminhamento: Criar espaços de confiança em que o professor sinta-se confortável para falar sobre sua saúde emocional, desafios pessoais e profissionais...</p>
+          </div>
+        </div>
+
+    <!-- BOTÕES DE AÇÃO -->
+    <div class="actions">
+      <button type="submit">Gerar PDF</button>
+      <a id="whatsapp-share" href="#" target="_blank" class="btn">Compartilhar no WhatsApp</a>
+      <button id="novo-form" type="button">Novo Formulário</button>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2025 Sistema de Acompanhamento Pedagógico. Todos os direitos reservados.</p>
-    </footer>
+  </form>
+</div>
 
-    <script src="script-completo.js"></script>
-    <script src="mobile-enhancements.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("formulario");
+  const whatsappBtn = document.getElementById("whatsapp-share");
+  const accordions = document.querySelectorAll(".accordion");
+  const progressBar = document.getElementById("progress-bar");
+
+  function updateProgress() {
+    const inputs = form.querySelectorAll("input, select, textarea");
+    const total = inputs.length;
+    let filled = 0;
+    inputs.forEach(input => {
+      if (input.type === "checkbox" || input.type === "radio") {
+        if (input.checked) filled++;
+      } else if (input.value.trim() !== "") {
+        filled++;
+      }
+    });
+    const percent = Math.round((filled / total) * 100);
+    progressBar.style.width = percent + "%";
+  }
+
+  form.querySelectorAll("input, select, textarea").forEach(field => {
+    field.addEventListener("input", function () {
+      if (this.required && this.value.trim() === "") {
+        this.style.border = "2px solid red";
+      } else if (this.value.trim() !== "") {
+        this.style.border = "2px solid green";
+      } else {
+        this.style.border = "1px solid #ccc";
+      }
+      updateProgress();
+    });
+  });
+
+  accordions.forEach((acc, index) => {
+    acc.addEventListener("click", function () {
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        document.querySelectorAll(".panel").forEach(p => p.style.display = "none");
+        panel.style.display = "block";
+        panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+    if (index === 0) {
+      acc.classList.add("active");
+      acc.nextElementSibling.style.display = "block";
+    }
+  });
+
+  document.getElementById("novo-form").addEventListener("click", function () {
+    form.reset();
+    form.querySelectorAll("input, select, textarea").forEach(f => f.style.border = "1px solid #ccc");
+    progressBar.style.width = "0%";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.querySelector("header").classList.add("highlight");
+    setTimeout(() => document.querySelector("header").classList.remove("highlight"), 1000);
+  });
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => data[key] = value);
+
+    const existingPdfBytes = await fetch("Acompanhamentobase.pdf").then(res => res.arrayBuffer());
+    const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes, { updateMetadata: false });
+    const pdfForm = pdfDoc.getForm();
+
+    function trySetField(fieldName, value) {
+      try { if (pdfForm.getTextField(fieldName)) { pdfForm.getTextField(fieldName).setText(String(value || "")); return; } } catch {}
+      try { if (pdfForm.getCheckBox(fieldName)) { ["on","true","1","sim"].includes(String(value).toLowerCase()) ? pdfForm.getCheckBox(fieldName).check() : pdfForm.getCheckBox(fieldName).uncheck(); return; } } catch {}
+      try { if (pdfForm.getRadioGroup(fieldName)) { pdfForm.getRadioGroup(fieldName).select(String(value)); return; } } catch {}
+      try { if (pdfForm.getDropdown(fieldName)) { pdfForm.getDropdown(fieldName).select(String(value)); return; } } catch {}
+      console.warn(`Campo não encontrado no PDF: ${fieldName}`);
+    }
+
+    Object.keys(data).forEach(key => trySetField(key, data[key]));
+
+    const helv = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+    pdfForm.updateFieldAppearances(helv);
+
+    function sanitize(str) {
+      return String(str || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9 _-]/g, "").trim().replace(/\s+/g, "_") || "SemValor";
+    }
+
+    const nomeArquivo = `Acompanhamento_${sanitize(data.creche)}_${sanitize(data.turma)}_${sanitize(data.turno)}.pdf`;
+
+    const pdfBytes = await pdfDoc.save({ updateFieldAppearances: false });
+    const blob = new Blob([pdfBytes], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = nomeArquivo;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+
+    whatsappBtn.href = "https://wa.me/?text=" + encodeURIComponent(`PDF gerado: ${nomeArquivo}`);
+  });
+
+  updateProgress();
+});
+</script>
+
 </body>
 </html>
-
