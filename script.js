@@ -5,44 +5,44 @@ const formEl = document.getElementById("formulario");
 const progressBar = document.getElementById("progressBar");
 const STORAGE_KEY = "formAcompanhamento2025";
 
-// Carrega dados salvos no localStorage
-window.addEventListener("DOMContentLoaded", () => {
-  const savedData = localStorage.getItem(STORAGE_KEY);
-  if (savedData) {
-    try {
-      const dataObj = JSON.parse(savedData);
-      for (const [key, value] of Object.entries(dataObj)) {
-        const field = formEl.elements[key];
-        if (field) {
-          if (field.type === "checkbox" || field.type === "radio") {
-            field.checked = value === true || value === "true";
-          } else {
-            field.value = value;
-          }
-        }
-      }
-    } catch (e) {
-      console.warn("Erro ao restaurar dados:", e);
-    }
-  }
-  updateProgress();
-});
-
-// Salva dados sempre que um campo muda
-formEl.addEventListener("input", () => {
-  const dataToSave = {};
+// Função para salvar todos os campos
+function saveFormData() {
+  const dataToSave = [];
   Array.from(formEl.elements).forEach(el => {
     if (el.name) {
       if (el.type === "checkbox" || el.type === "radio") {
-        dataToSave[el.name] = el.checked;
+        dataToSave.push({ name: el.name, value: el.value, checked: el.checked, type: el.type });
       } else {
-        dataToSave[el.name] = el.value;
+        dataToSave.push({ name: el.name, value: el.value, type: el.type });
       }
     }
   });
   localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
-  updateProgress();
-});
+}
+
+// Função para restaurar todos os campos
+function restoreFormData() {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (!savedData) return;
+
+  try {
+    const dataArray = JSON.parse(savedData);
+    dataArray.forEach(item => {
+      const fields = Array.from(formEl.querySelectorAll(`[name="${item.name}"]`));
+      fields.forEach(field => {
+        if (item.type === "checkbox" || item.type === "radio") {
+          if (field.value === item.value) {
+            field.checked = item.checked;
+          }
+        } else {
+          field.value = item.value;
+        }
+      });
+    });
+  } catch (e) {
+    console.warn("Erro ao restaurar dados:", e);
+  }
+}
 
 // Atualiza barra de progresso
 function updateProgress() {
@@ -62,7 +62,23 @@ function updateProgress() {
   progressBar.textContent = `${percent}%`;
 }
 
-// Botão "Novo Formulário" - limpa localStorage e formulário
+// Restaurar no carregamento
+window.addEventListener("DOMContentLoaded", () => {
+  restoreFormData();
+  updateProgress();
+});
+
+// Salvar e atualizar progresso a cada mudança
+formEl.addEventListener("input", () => {
+  saveFormData();
+  updateProgress();
+});
+formEl.addEventListener("change", () => {
+  saveFormData();
+  updateProgress();
+});
+
+// Botão "Novo Formulário"
 document.getElementById("btnResetTop").addEventListener("click", () => {
   if (confirm("Tem certeza que deseja iniciar um novo formulário? Todos os dados serão apagados.")) {
     localStorage.removeItem(STORAGE_KEY);
