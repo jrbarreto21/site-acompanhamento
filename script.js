@@ -1,4 +1,81 @@
-document.getElementById("formulario").addEventListener("submit", async function (e) {
+// ===============================
+// RESTAURAÇÃO E SALVAMENTO AUTOMÁTICO
+// ===============================
+const formEl = document.getElementById("formulario");
+const progressBar = document.getElementById("progressBar");
+const STORAGE_KEY = "formAcompanhamento2025";
+
+// Carrega dados salvos no localStorage
+window.addEventListener("DOMContentLoaded", () => {
+  const savedData = localStorage.getItem(STORAGE_KEY);
+  if (savedData) {
+    try {
+      const dataObj = JSON.parse(savedData);
+      for (const [key, value] of Object.entries(dataObj)) {
+        const field = formEl.elements[key];
+        if (field) {
+          if (field.type === "checkbox" || field.type === "radio") {
+            field.checked = value === true || value === "true";
+          } else {
+            field.value = value;
+          }
+        }
+      }
+    } catch (e) {
+      console.warn("Erro ao restaurar dados:", e);
+    }
+  }
+  updateProgress();
+});
+
+// Salva dados sempre que um campo muda
+formEl.addEventListener("input", () => {
+  const dataToSave = {};
+  Array.from(formEl.elements).forEach(el => {
+    if (el.name) {
+      if (el.type === "checkbox" || el.type === "radio") {
+        dataToSave[el.name] = el.checked;
+      } else {
+        dataToSave[el.name] = el.value;
+      }
+    }
+  });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
+  updateProgress();
+});
+
+// Atualiza barra de progresso
+function updateProgress() {
+  const fields = Array.from(formEl.elements).filter(el =>
+    el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT"
+  );
+  const total = fields.length;
+  const filled = fields.filter(el => {
+    if (el.type === "checkbox" || el.type === "radio") {
+      return el.checked;
+    }
+    return el.value && el.value.trim() !== "";
+  }).length;
+
+  const percent = Math.round((filled / total) * 100) || 0;
+  progressBar.style.width = `${percent}%`;
+  progressBar.textContent = `${percent}%`;
+}
+
+// Botão "Novo Formulário" - limpa localStorage e formulário
+document.getElementById("btnResetTop").addEventListener("click", () => {
+  if (confirm("Tem certeza que deseja iniciar um novo formulário? Todos os dados serão apagados.")) {
+    localStorage.removeItem(STORAGE_KEY);
+    formEl.reset();
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+});
+
+// ===============================
+// LÓGICA ORIGINAL DE GERAÇÃO DE PDF
+// ===============================
+formEl.addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const formData = new FormData(e.target);
@@ -12,7 +89,6 @@ document.getElementById("formulario").addEventListener("submit", async function 
   const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
   const form = pdfDoc.getForm();
 
-  // Função robusta para tentar preencher qualquer tipo de campo
   function trySetField(fieldName, value) {
     try {
       if (form.getTextField(fieldName)) {
@@ -45,41 +121,33 @@ document.getElementById("formulario").addEventListener("submit", async function 
     console.warn(`Campo não encontrado no PDF: ${fieldName}`);
   }
 
-  // Percorre todos os campos enviados e tenta preencher
   Object.keys(data).forEach(key => {
     trySetField(key, data[key]);
   });
 
-  // Atualiza as aparências para garantir que fique visível
   const helv = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
   form.updateFieldAppearances(helv);
 
-  // Salva o PDF mantendo editável
   const pdfBytes = await pdfDoc.save();
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const url = URL.createObjectURL(blob);
 
-  // --- Monta o nome do arquivo usando os campos do formulário ---
-  // Tentamos pegar os nomes exatamente como no seu index.html: "creche", "turma", "turno".
-  // Se no seu HTML os names forem diferentes, substitua aqui pelos nomes corretos.
   const crecheRaw = data.creche || data['Nome da Creche'] || '';
   const turmaRaw  = data.turma  || data['Turma'] ||  '';
   const turnoRaw  = data.turno  || data['Turno'] || '';
 
   function sanitizeFilename(str) {
-    // remove diacríticos, caracteres inválidos e converte espaços para underscore
     return String(str || '')
-      .normalize('NFKD')                     // separa diacríticos
-      .replace(/[\u0300-\u036f]/g, '')       // remove acentos
-      .replace(/[^a-zA-Z0-9 _-]/g, '')      // permite apenas letras, números, space, underscore e hífen
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-zA-Z0-9 _-]/g, '')
       .trim()
-      .replace(/\s+/g, '_')                 // espaços -> _
+      .replace(/\s+/g, '_')
       || 'SemValor';
   }
 
   const nomeArquivo = `Acompanhamento_${sanitizeFilename(crecheRaw)}_${sanitizeFilename(turmaRaw)}_${sanitizeFilename(turnoRaw)}.pdf`;
 
-  // Baixa o PDF com o nome gerado
   const link = document.createElement("a");
   link.href = url;
   link.download = nomeArquivo;
@@ -87,10 +155,6 @@ document.getElementById("formulario").addEventListener("submit", async function 
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
-
-  // Atualiza link WhatsApp (nota: blob URL não é útil para compartilhar fora do dispositivo; aqui só notificamos o nome)
- // document.getElementById("whatsapp-share").href =
-  //  "https://wa.me/?text=" + encodeURIComponent("PDF gerado: " + nomeArquivo + " (baixado localmente).");
 
   console.log("PDF gerado:", nomeArquivo);
 });

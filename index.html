@@ -232,7 +232,28 @@
     @media (min-width:700px){
       .form-grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
     }
-  </style>
+  
+    /* Barra de progresso */
+    .progress-container {
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      height: 18px;
+      margin-bottom: 15px;
+    }
+    .progress-bar {
+      height: 100%;
+      background-color: var(--primary);
+      width: 0%;
+      color: white;
+      font-size: 12px;
+      text-align: center;
+      line-height: 18px;
+      transition: width 0.3s ease;
+    }
+
+</style>
 </head>
 <body>
 
@@ -267,6 +288,11 @@
 
       <h2 class="section-title">Formulário de Acompanhamento Pedagógico</h2>
       <p class="lead">Preencha as seções abaixo. Use o botão <strong>Gerar PDF</strong> quando finalizar.</p>
+
+      <!-- Barra de Progresso -->
+      <div class="progress-container">
+        <div id="progressBar" class="progress-bar">0%</div>
+      </div>
 
       <!-- ======== FORMULÁRIO (mantém todos os campos originais, organizados) ======== -->
       <form id="formulario" class="form-root" autocomplete="off">
