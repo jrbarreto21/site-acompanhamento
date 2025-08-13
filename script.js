@@ -88,6 +88,19 @@ document.getElementById("btnResetTop").addEventListener("click", () => {
   }
 });
 
+// Botão "Limpar Formulário" (mesma mensagem do novo formulário)
+const btnLimpar = document.getElementById("btnLimparForm");
+if (btnLimpar) {
+  btnLimpar.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (confirm("Tem certeza que deseja limpar o formulário? Todos os dados serão apagados.")) {
+      localStorage.removeItem(STORAGE_KEY);
+      formEl.reset();
+      updateProgress();
+    }
+  });
+}
+
 // ===============================
 // LÓGICA ORIGINAL DE GERAÇÃO DE PDF
 // ===============================
