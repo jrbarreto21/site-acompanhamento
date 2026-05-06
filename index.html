@@ -296,7 +296,7 @@
 
       <!-- ======== FORMULÁRIO (mantém todos os campos originais, organizados) ======== -->
       <form id="formulario" class="form-root" autocomplete="off">
-        <!-- === Campos iniciais (Creche / Turma / Turno) === -->
+        <!-- === Campos iniciais (professor / Turma / Turno) === -->
         <!-- Comentário: Esses campos são usados para identificar o PDF gerado e o compartilhamento no WhatsApp -->
           <div>
             <label class="field">Nome do Professor
@@ -316,20 +316,43 @@
             </label><br>
           </div>
         		
-			
-		 </div>
-		 
-		    <div class="form-row"><br><br>
+		
+		<button type="button" class="accordion accent-1" data-panel="secao1" aria-expanded="false" id="secao1Btn">
+          <div class="left">
+            <span class="acc-icon" aria-hidden="true"></span>
+            <div>
+              <span class="acc-title">Plano de Curso</span>
+            </div>
+          </div>
+          <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>		
+		 		 
+		    <div class="form-row"><br>
             <label class="field">Inserido</label>
-            <input type="text" name="inserido">
+            <input id="inserido" type="text" name="inserido">
           </div>
 		  
 		    <div class="form-row">
             <label class="field">Falta iserir</label>
-            <input type="text" name="falta_inserir">
+            <input id="falta_inserir" type="text" name="falta_inserir">
+	          </div>
+	
+		<button type="button" class="accordion accent-1" data-panel="secao1" aria-expanded="false" id="secao1Btn">
+          <div class="left">
+            <span class="acc-icon" aria-hidden="true"></span>
+            <div>
+              <span class="acc-title">Frequências</span>
+            </div>
           </div>
-		  
-		    <div class="form-row">
+          <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+	
+		    <div class="form-row"><br>
             <label class="field">Frequência inserida até:</label>
             <input type="text" name="freq_ate">
           </div>
@@ -339,7 +362,21 @@
             <input type="text" name="obs_1">
           </div>
 		  
-          <div class="form-row">
+		  <button type="button" class="accordion accent-1" data-panel="secao1" aria-expanded="false" id="secao1Btn">
+          <div class="left">
+            <span class="acc-icon" aria-hidden="true"></span>
+            <div>
+              <span class="acc-title">Relatórios de objetivos de aprendizagem/habilidades:</span>
+            </div>
+          </div>
+          <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+		  
+		  
+		  
+          <div class="form-row"><br>
             <label class="field"></label>
             <select name="rel_obj">
               <option value="">Selecione</option>
@@ -355,7 +392,20 @@
             <input type="text" name="obs_2">
           </div>
 		  
-		  <div class="form-row">
+		  <button type="button" class="accordion accent-1" data-panel="secao1" aria-expanded="false" id="secao1Btn">
+          <div class="left">
+            <span class="acc-icon" aria-hidden="true"></span>
+            <div>
+              <span class="acc-title">Relatórios descritivos:</span>
+            </div>
+          </div>
+          <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+		
+		  
+		  <div class="form-row"><br>
             <label class="field"></label>
             <select name="rel_des">
               <option value="">Selecione</option>
@@ -371,7 +421,19 @@
             <input type="text" name="obs_3">
           </div>
 		  
-		     <div class="form-row">
+		  <button type="button" class="accordion accent-1" data-panel="secao1" aria-expanded="false" id="secao1Btn">
+          <div class="left">
+            <span class="acc-icon" aria-hidden="true"></span>
+            <div>
+              <span class="acc-title">Registros de aula</span>
+            </div>
+          </div>
+          <svg class="acc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#2b6cb0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+		  
+		     <div class="form-row"><br>
             <label class="field">Registros de aulas até:</label>
             <input type="text" name="registros_ate">
           </div>
@@ -380,6 +442,8 @@
             <label class="field">Observações:</label>
             <input type="text" name="obs_4">
           </div>
+		  
+		  </div>
 
           
 
@@ -423,7 +487,7 @@
     /**
      * Script descritivo:
      * - Controla o comportamento do accordion (abrir/fechar com animação)
-     * - Atualiza o link do WhatsApp com os dados principais (creche, turma, turno)
+     * - Atualiza o link do WhatsApp com os dados principais (professor, turma, turno)
      * - Controla o botão "Novo Formulário" do header (reset + scroll suave + destaque)
      * - Fornece hooks para o botão Gerar PDF (atualmente placeholder)
      */
@@ -469,20 +533,20 @@
 
      /* // WHATSAPP: monta a mensagem com os campos principais
       const whatsappLink = document.getElementById('whatsapp-share');
-      const crecheInput = document.getElementById('creche');
+      const professorInput = document.getElementById('Professor');
       const turmaInput = document.getElementById('turma');
       const turnoInput = document.getElementById('turno');
 
       function updateWhatsapp(){
-        const creche = crecheInput.value.trim() || '[Nome da Creche]';
+        const professor = professorInput.value.trim() || '[Nome da professor]';
         const turma = turmaInput.value.trim() || '[Turma]';
         const turno = turnoInput.value.trim() || '[Turno]';
-        const text = encodeURIComponent(`Acompanhamento Pedagógico\\nCreche: ${creche}\\nTurma: ${turma}\\nTurno: ${turno}\\n(Resumo gerado pelo sistema)`);
+        const text = encodeURIComponent(`Acompanhamento Pedagógico\\nprofessor: ${professor}\\nTurma: ${turma}\\nTurno: ${turno}\\n(Resumo gerado pelo sistema)`);
         whatsappLink.href = `https://api.whatsapp.com/send?text=${text}`;
       }
 
       // atualiza ao digitar
-      [crecheInput, turmaInput, turnoInput].forEach(el => {
+      [professorInput, turmaInput, turnoInput].forEach(el => {
         el.addEventListener('input', updateWhatsapp);
       });
       updateWhatsapp();
