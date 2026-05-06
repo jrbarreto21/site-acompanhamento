@@ -161,7 +161,7 @@ formEl.addEventListener("submit", async function (e) {
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const url = URL.createObjectURL(blob);
 
-  const crecheRaw = data.creche || data['Nome da Creche'] || '';
+  const professorRaw = data.professor || data['Nome da professor'] || '';
   const turmaRaw  = data.turma  || data['Turma'] ||  '';
   const turnoRaw  = data.turno  || data['Turno'] || '';
 
@@ -175,7 +175,7 @@ formEl.addEventListener("submit", async function (e) {
       || 'SemValor';
   }
 
-  const nomeArquivo = `Acompanhamento_${sanitizeFilename(crecheRaw)}_${sanitizeFilename(turmaRaw)}_${sanitizeFilename(turnoRaw)}.pdf`;
+  const nomeArquivo = `Acompanhamento_${sanitizeFilename(professorRaw)}_${sanitizeFilename(turmaRaw)}_${sanitizeFilename(turnoRaw)}.pdf`;
 
   const link = document.createElement("a");
   link.href = url;
